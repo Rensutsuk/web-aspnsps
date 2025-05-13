@@ -26,9 +26,7 @@ export default function AboutPage() {
             <div className="prose max-w-none bg-base-200 p-8 rounded-xl shadow-lg">
               <h2 className="text-3xl font-bold mb-6">Our Mission</h2>
               <p className="text-base leading-relaxed">
-                We strive to be a welcoming community that celebrates God&apos;s love through worship, education, and service.
-                Our mission is to spread the Gospel message and make disciples through active participation in the
-                sacramental life of the Church.
+                The Archdiocesan Shrine and Parish of Nuestra Señora del Perpetuo Socorro stands in the midst of the City of Manila as a religious sanctuary, inviting devotees and pilgrims from all walks of life to reflection, renewal, and reconciliation. As a house of prayer, the Shrine offers individuals, as well as groups of the faithful, opportunities for the celebration of the faith and an environment conducive to personal example of the Blessed Virgin Mary, recounted in word and art, becomes an important and effective instrument to inspire, encourage and strengthen faith among the faithful.
               </p>
             </div>
           </div>
@@ -42,17 +40,17 @@ export default function AboutPage() {
                     <div className="avatar">
                       <div className="w-32 h-32 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
                         <Image
-                          src="https://picsum.photos/200/200?random=2"
-                          alt="Fr. John Smith"
+                          src="/img/about/priest/fr-tony.jpg"
+                          alt="Rev. Fr. Antonio V. Navarette Jr."
                           className="object-cover"
                           width={200}
                           height={200} />
                       </div>
                     </div>
                     <div className="text-center sm:text-left">
-                      <h3 className="text-2xl font-bold">Rev. Fr. John Smith</h3>
-                      <p className="text-primary font-semibold mt-1">Parish Priest</p>
-                      <p className="mt-3 text-base">Serving our parish since 2015, Fr. John leads our community with wisdom and compassion.</p>
+                      <h3 className="text-2xl font-bold">Rev. Fr. Antonio V. Navarette Jr.</h3>
+                      <p className="text-primary font-semibold mt-1">Rector and Parish Priest</p>
+                      <p className="mt-3 text-base">Serving our shrine community since 2021. Fr. Tony leads our community with wisdom and compassion.</p>
                     </div>
                   </div>
 
@@ -61,7 +59,7 @@ export default function AboutPage() {
                       <div className="w-32 h-32 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
                         <Image
                           src="https://picsum.photos/200/200?random=3"
-                          alt="Fr. Michael Johnson"
+                          alt="Fr. Jasper"
                           className="object-cover"
                           width={200}
                           height={200}
@@ -69,8 +67,8 @@ export default function AboutPage() {
                       </div>
                     </div>
                     <div className="text-center sm:text-left">
-                      <h3 className="text-2xl font-bold">Rev. Fr. Michael Johnson</h3>
-                      <p className="text-primary font-semibold mt-1">Assistant Priest</p>
+                      <h3 className="text-2xl font-bold">Rev. Fr. Jasper Rellesiva</h3>
+                      <p className="text-primary font-semibold mt-1">Guest Priest</p>
                       <p className="mt-3 text-base">Fr. Michael focuses on youth ministry and family pastoral care.</p>
                     </div>
                   </div>
@@ -80,15 +78,15 @@ export default function AboutPage() {
                       <div className="w-32 h-32 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
                         <Image
                           src="https://picsum.photos/200/200?random=4"
-                          alt="Fr. Robert Davis"
+                          alt="Fr. Robert"
                           className="object-cover"
                           width={200}
                           height={200} />
                       </div>
                     </div>
                     <div className="text-center sm:text-left">
-                      <h3 className="text-2xl font-bold">Rev. Fr. Robert Davis</h3>
-                      <p className="text-primary font-semibold mt-1">Assistant Priest</p>
+                      <h3 className="text-2xl font-bold">Rev. Fr. Robert Young</h3>
+                      <p className="text-primary font-semibold mt-1">Guest Priest</p>
                       <p className="mt-3 text-base">Fr. Robert specializes in marriage counseling and adult faith formation.</p>
                     </div>
                   </div>
@@ -98,7 +96,7 @@ export default function AboutPage() {
 
             <div className="relative h-80 rounded-xl overflow-hidden shadow-xl">
               <Image
-                src="https://picsum.photos/800/600?random=1"
+                src="/img/about/church-building.jpg"
                 alt="Church Building"
                 className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
                 width={800}
@@ -107,7 +105,7 @@ export default function AboutPage() {
               <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent">
                 <div className="absolute bottom-0 left-0 p-6">
                   <h3 className="text-white text-2xl font-bold">Our Church Building</h3>
-                  <p className="text-white/90">Established 1995</p>
+                  <p className="text-white/90">Established 1951</p>
                 </div>
               </div>
             </div>

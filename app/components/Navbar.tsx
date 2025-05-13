@@ -25,7 +25,7 @@ export default function Navbar() {
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d={isMenuOpen ? "M6 18L18 6M6 6l12 12" : "M4 6h16M4 12h8m-8 6h16"} />
             </svg>
           </button>
-          <Link href="/" className="btn btn-ghost text-xl">Parish Name</Link>
+          <Link href="/" className="btn btn-ghost text-xl">ASPNSPS</Link>
         </div>
         
         <div className="navbar-center hidden lg:flex">
