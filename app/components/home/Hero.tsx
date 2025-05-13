@@ -8,7 +8,6 @@ export default function Hero() {
           src="/img/home/hero.jpg"
           alt="Church"
           className="w-full h-screen object-cover"
-          objectFit='cover'
           width={1440}
           height={1080}
           priority
