@@ -1,8 +1,27 @@
 import Image from "next/image";
 
 export default function ImageScroll() {
-  const images1 = Array.from({ length: 8 }, (_, i) => `https://picsum.photos/800/600?random=${i + 1}`);
-  const images2 = Array.from({ length: 8 }, (_, i) => `https://picsum.photos/800/600?random=${i + 9}`);
+  const images1 = [
+    "/img/home/carousel-1/0.jpg",
+    "/img/home/carousel-1/1.jpg",
+    "/img/home/carousel-1/2.jpg",
+    "/img/home/carousel-1/3.jpg",
+    "/img/home/carousel-1/4.jpg",
+    "/img/home/carousel-1/5.jpg",
+    "/img/home/carousel-1/6.jpg",
+    "/img/home/carousel-1/7.jpg"
+  ];
+  
+  const images2 = [
+    "/img/home/carousel-2/0.jpg",
+    "/img/home/carousel-2/1.jpg",
+    "/img/home/carousel-2/2.jpg",
+    "/img/home/carousel-2/3.jpg",
+    "/img/home/carousel-2/4.jpg",
+    "/img/home/carousel-2/5.jpg",
+    "/img/home/carousel-2/6.jpg",
+    "/img/home/carousel-2/7.jpg"
+  ];
 
   return (
     <div className="py-12 overflow-hidden bg-base-100">

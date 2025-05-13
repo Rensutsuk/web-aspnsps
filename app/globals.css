@@ -7,33 +7,33 @@
   name: "mytheme";
   default: true;
   color-scheme: light;
-  --color-base-100: oklch(98% 0.02 280);
-  --color-base-200: oklch(95% 0.03 280);
-  --color-base-300: oklch(92% 0.04 280);
-  --color-base-content: oklch(20% 0.05 280);
+  --color-base-100: oklch(95% 0.02 240);
+  --color-base-200: oklch(90% 0.03 240);
+  --color-base-300: oklch(85% 0.04 240);
+  --color-base-content: oklch(25% 0.05 240);
   
-  --color-primary: oklch(65% 0.2 280);
-  --color-primary-content: oklch(98% 0.01 280);
+  --color-primary: oklch(65% 0.15 240);
+  --color-primary-content: oklch(95% 0.01 240);
   
-  --color-secondary: oklch(75% 0.15 270);
-  --color-secondary-content: oklch(98% 0.01 270);
+  --color-secondary: oklch(70% 0.12 230);
+  --color-secondary-content: oklch(95% 0.01 230);
   
-  --color-accent: oklch(60% 0.2 290);
-  --color-accent-content: oklch(98% 0.01 290);
+  --color-accent: oklch(60% 0.15 250);
+  --color-accent-content: oklch(95% 0.01 250);
   
-  --color-neutral: oklch(55% 0.05 280);
-  --color-neutral-content: oklch(98% 0.01 280);
+  --color-neutral: oklch(65% 0.05 240);
+  --color-neutral-content: oklch(98% 0.01 240);
   
-  --color-info: oklch(70% 0.15 275);
-  --color-info-content: oklch(98% 0.01 275);
+  --color-info: oklch(80% 0.1 235);
+  --color-info-content: oklch(98% 0.01 235);
   
-  --color-success: oklch(85% 0.15 140);
+  --color-success: oklch(85% 0.1 140);
   --color-success-content: oklch(98% 0.01 140);
   
-  --color-warning: oklch(85% 0.15 80);
+  --color-warning: oklch(85% 0.1 80);
   --color-warning-content: oklch(20% 0.05 80);
   
-  --color-error: oklch(85% 0.15 30);
+  --color-error: oklch(85% 0.1 30);
   --color-error-content: oklch(98% 0.01 30);
 
   --radius-box: 0.5rem;

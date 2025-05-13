@@ -6,7 +6,7 @@ export default function Footer() {
       <aside className="flex items-center gap-2">
         <FaCross size={24} className="fill-current" />
         <p>
-          Parish Name
+          ASPNSPS
           <br />
           Serving the community since 1992
         </p>
@@ -19,9 +19,9 @@ export default function Footer() {
             <FaPhone size={16} />
             <span>(123) 456-7890</span>
           </a>
-          <a href="mailto:contact@parish.com" className="flex items-center gap-2 hover:text-primary transition-colors">
+          <a href="mailto:nsps_parish@yahoo.com" className="flex items-center gap-2 hover:text-primary transition-colors">
             <FaEnvelope size={16} />
-            <span>contact@parish.com</span>
+            <span>nsps_parish@yahoo.com</span>
           </a>
         </div>
       </nav>
@@ -29,13 +29,13 @@ export default function Footer() {
       <nav>
         <h6 className="footer-title">Social</h6>
         <div className="grid grid-flow-col gap-4">
-          <a href="#" className="hover:text-primary transition-colors">
+          <a href="https://www.facebook.com/aspnspsofficial" className="hover:text-primary transition-colors">
             <FaFacebook size={24} />
           </a>
-          <a href="#" className="hover:text-pink-400 transition-colors">
+          <a href="https://instagram.com/aspnspsofficial" className="hover:text-pink-400 transition-colors">
             <FaInstagram size={24} />
           </a>
-          <a href="#" className="hover:text-indigo-400 transition-colors">
+          <a href="https://tiktok.com/@aspnspsofficial" className="hover:text-indigo-400 transition-colors">
             <FaTiktok size={24} />
           </a>
         </div>
