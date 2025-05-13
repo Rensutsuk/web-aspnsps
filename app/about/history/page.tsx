@@ -16,7 +16,7 @@ export default function HistoryPage() {
               width={1200}
               height={800}
             />
-            
+
             <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex items-end">
               <div className="p-8 text-white">
                 <h2 className="text-3xl font-bold">Our Journey Through Time</h2>
