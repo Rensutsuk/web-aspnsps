@@ -7,24 +7,24 @@ export default function Schedule() {
   const [activeTab, setActiveTab] = useState('mass');
 
   const massSchedules = [
-    { day: "Sunday", times: ["6:00 AM", "8:00 AM", "10:00 AM", "5:00 PM"] },
-    { day: "Monday", times: ["6:30 AM", "5:30 PM"] },
-    { day: "Tuesday", times: ["6:30 AM", "5:30 PM"] },
-    { day: "Wednesday", times: ["6:30 AM", "5:30 PM"] },
-    { day: "Thursday", times: ["6:30 AM", "5:30 PM"] },
-    { day: "Friday", times: ["6:30 AM", "5:30 PM"] },
-    { day: "Saturday", times: ["6:30 AM", "5:00 PM"] },
+    { day: "Sunday", times: ["6:00 AM", "7:00 AM", "8:30 AM", "10:00 AM", "12:15 PM", "4:00 PM", "5:30 PM", "7:00 PM"] },
+    { day: "Monday", times: ["6:00 AM", "6:00 PM"] },
+    { day: "Tuesday", times: ["6:00 AM", "6:00 PM"] },
+    { day: "Wednesday", times: ["6:00 AM", "12:15 PM", "6:00 PM"] },
+    { day: "Thursday", times: ["6:00 AM", "6:00 PM"] },
+    { day: "Friday", times: ["6:00 AM", "6:00 PM"] },
+    { day: "Saturday", times: ["6:00 AM", "6:00 PM"] },
   ];
 
   const confessionSchedules = [
     { day: "Wednesday", times: ["5:30 PM - 6:00 PM"] },
     { day: "Friday", times: ["5:30 PM - 6:00 PM"] },
-    { day: "Saturday", times: ["5:30 PM - 6:00"] },
+    { day: "Saturday", times: ["5:30 PM - 6:00 PM"] },
   ];
 
   const otherServices = [
     {
-      title: "Holy Hour",
+      title: "Holy Hour and Vespers",
       schedules: [
         { day: "Wednesdays", times: ["5:00 PM - 6:00 PM"] },
         { day: "First Friday", times: ["5:00 PM - 6:00 PM"] },

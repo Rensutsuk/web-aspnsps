@@ -1,36 +1,73 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Archdiocesan Shrine of Nuestra Señora Del Perpetuo Socorro
+
+[![Next.js](https://img.shields.io/badge/Next.js-13.5.6-black?logo=next.js)](https://nextjs.org/)
+[![React](https://img.shields.io/badge/React-19.0.0-blue?logo=react)](https://reactjs.org/)
+
+Official website for the Archdiocesan Shrine of Nuestra Señora Del Perpetuo Socorro in Sampaloc, Manila.
+
+## Features
+
+- **Responsive Design**: Fully responsive layout for all devices
+- **Mass Schedule**: Up-to-date mass and confession schedules
+- **Parish Information**: History, ministries, and services
+- **Blog System**: Markdown-based content management
+- **Contact Forms**: Easy communication with parish staff
+- **Donation Options**: Secure online giving
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
+- Node.js 18+
+- npm/yarn/pnpm
 
+### Installation
 ```bash
-npm run dev
+npm install
 # or
-yarn dev
+yarn install
 # or
-pnpm dev
-# or
-bun dev
+pnpm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Blog System Documentation
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+The parish website includes a complete blog system for publishing announcements, reflections, and news. The system uses markdown files for content management.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Blog Features
+- Markdown-based content creation
+- Automatic listing and pagination
+- Featured images support
+- Author attribution and date display
+- Responsive design for all devices
 
-## Learn More
+### Creating New Blog Posts
+1. Create a new `.md` file in the `public/blogs/` directory
+2. Use this frontmatter format at the top of the file:
+```markdown
+---
+title: "Your Post Title"
+date: "YYYY-MM-DD"  # Format: 2024-01-01
+author: "Author Name"
+excerpt: "Brief description (max 150 characters)"
+featuredImage: "/images/blog/your-image.jpg"  # Path to image
+---
+```
+3. Write your content below using markdown syntax
+4. Save the file with a descriptive name (e.g., easter-reflection-2024.md )
 
-To learn more about Next.js, take a look at the following resources:
+### Blog Post Requirements
+- Images : Should be placed in public/images/blog/
+- File Naming : Use lowercase with hyphens (no spaces)
+- Dates : Must be in YYYY-MM-DD format
+- Excerpt : Keep under 150 characters
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Blog Components
+- BlogList : Displays paginated posts on homepage
+- BlogPost : Renders individual blog pages
+- API Route : /api/blogs fetches and processes posts
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Technical Details
+- Posts are automatically sorted by date (newest first)
+- Each post gets its own URL at /blog/[slug\]
+- Supports markdown formatting (headings, lists, links, etc.)
+- Images are optimized using Next.js Image component
