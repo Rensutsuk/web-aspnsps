@@ -2,7 +2,7 @@ import { FaFacebook, FaCross, FaInstagram, FaTiktok, FaPhone, FaEnvelope } from 
 
 export default function Footer() {
   return (
-    <footer className="footer sm:footer-horizontal bg-neutral text-neutral-content p-10">
+    <footer className="footer sm:footer-horizontal bg-neutral text-neutral-content p-6 w-full">
       <aside className="flex items-center gap-2">
         <FaCross size={24} className="fill-current" />
         <p>

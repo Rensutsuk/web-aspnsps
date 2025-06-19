@@ -53,42 +53,64 @@ export default function MinistriesPage() {
   ];
 
   return (
-    <div className="min-h-screen pt-8">
+    <div className="min-h-screen pt-16 bg-gradient-to-br from-base-200 to-base-100">
       <div className="container mx-auto px-4 py-12">
-        <h1 className="text-4xl font-bold text-center mb-16">Our Ministries</h1>
+        <h1 className="text-4xl font-bold text-center mb-16 text-primary">Our Ministries</h1>
         
-        <div className="space-y-24">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {ministries.map((ministry, index) => (
             <div 
               key={index}
-              className={`flex flex-col gap-8 items-center ${
-                index % 2 === 0 ? 'lg:flex-row' : 'lg:flex-row-reverse'
-              }`}
-            >
-              <div className="flex-1">
-                <div className="max-w-xl mx-auto">
-                  <h2 className="text-3xl font-bold mb-4">{ministry.title}</h2>
-                  <p className="mb-6 text-base-content/80">{ministry.description}</p>
-                  <div className="card bg-base-200">
-                    <div className="card-body">
-                      <h3 className="card-title text-lg mb-2">Activities</h3>
-                      <ul className="list-disc list-inside space-y-1">
-                        {ministry.activities.map((activity, idx) => (
-                          <li key={idx}>{activity}</li>
-                        ))}
-                      </ul>
+              className="group perspective">
+              <div className="relative transform-style-3d transition-transform duration-1000 group-hover:rotate-y-180">
+                {/* Front of the card */}
+                <div className="backface-hidden">
+                  <div className="h-[450px] bg-base-100 rounded-xl shadow-2xl overflow-hidden">
+                    <div className="relative h-48 overflow-hidden">
+                      <Image
+                        src={ministry.image}
+                        alt={ministry.title}
+                        className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500"
+                        width={800}
+                        height={600}
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-base-100 to-transparent opacity-60"></div>
+                    </div>
+                    <div className="p-6">
+                      <h2 className="text-2xl font-bold mb-3 text-primary">{ministry.title}</h2>
+                      <p className="text-base-content/80 line-clamp-4">{ministry.description}</p>
+                    </div>
+                    <div className="absolute bottom-4 left-0 right-0 flex justify-center">
+                      <span className="text-sm text-primary-content/60 group-hover:text-primary-content/80 transition-colors duration-300">
+                        Hover to see activities
+                      </span>
                     </div>
                   </div>
                 </div>
-              </div>
-              <div className="flex-1">
-                <Image
-                  src={ministry.image} 
-                  alt={ministry.title}
-                  className="w-full h-[400px] object-cover rounded-lg shadow-xl"
-                  width={800}
-                  height={600}
-                />
+                
+                {/* Back of the card */}
+                <div className="absolute inset-0 backface-hidden rotate-y-180">
+                  <div className="h-[450px] bg-primary text-primary-content rounded-xl shadow-2xl p-6 flex flex-col">
+                    <h3 className="text-2xl font-bold mb-6 text-center">Activities</h3>
+                    <ul className="space-y-4 flex-grow">
+                      {ministry.activities.map((activity, idx) => (
+                        <li 
+                          key={idx}
+                          className="flex items-center space-x-3 opacity-0 animate-fade-in"
+                          style={{ animationDelay: `${idx * 150}ms` }}
+                        >
+                          <span className="w-2 h-2 bg-primary-content rounded-full"></span>
+                          <span>{activity}</span>
+                        </li>
+                      ))}
+                    </ul>
+                    <div className="text-center mt-4">
+                      <span className="text-sm opacity-60">
+                        Click to flip back
+                      </span>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           ))}

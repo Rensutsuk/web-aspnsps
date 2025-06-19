@@ -39,9 +39,9 @@ async function getBlogPost(slug: string): Promise<BlogPost | null> {
     // Parse the frontmatter and content
     const { data, content } = matter(fileContent);
 
-    // Convert markdown to HTML
+    // Convert markdown to HTML with proper list handling
     const processedContent = await remark()
-      .use(html)
+      .use(html, { sanitize: false })
       .process(content);
     const contentHtml = processedContent.toString();
 
@@ -103,7 +103,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
         </div>
 
         <div
-          className="prose prose-lg max-w-none prose-headings:font-bold prose-h1:text-4xl prose-h2:text-3xl prose-h3:text-2xl prose-h4:text-xl prose-p:text-gray-600 prose-p:mb-6 prose-a:text-primary hover:prose-a:text-primary-focus prose-blockquote:border-l-4 prose-blockquote:border-primary prose-blockquote:pl-4 prose-blockquote:italic prose-strong:text-gray-900 prose-code:text-primary prose-code:bg-base-200 prose-code:px-1 prose-code:py-0.5 prose-code:rounded prose-pre:bg-base-200 prose-pre:text-base-content prose-img:rounded-lg prose-img:shadow-lg prose-li:text-gray-600 prose-li:my-2 prose-ul:pl-6 prose-ul:my-6 prose-ol:pl-6 prose-ol:my-6 prose-ul:list-disc prose-ol:list-decimal prose-li:marker:text-primary space-y-6"
+          className="prose prose-lg max-w-none prose-headings:font-bold prose-h1:text-4xl prose-h2:text-3xl prose-h3:text-2xl prose-h4:text-xl prose-p:text-gray-600 prose-p:mb-6 prose-a:text-primary hover:prose-a:text-primary-focus prose-blockquote:border-l-4 prose-blockquote:border-primary prose-blockquote:pl-4 prose-blockquote:italic prose-strong:text-gray-900 prose-code:text-primary prose-code:bg-base-200 prose-code:px-1 prose-code:py-0.5 prose-code:rounded prose-pre:bg-base-200 prose-pre:text-base-content prose-img:rounded-lg prose-img:shadow-lg prose-li:text-gray-600 prose-li:my-2 prose-ul:pl-6 prose-ul:my-6 prose-ol:pl-6 prose-ol:my-6 prose-ul:list-disc prose-ol:list-decimal prose-li:marker:text-primary prose-li:marker:font-bold prose-li:before:hidden space-y-6"
           dangerouslySetInnerHTML={{ __html: post.content }}
         />
 
