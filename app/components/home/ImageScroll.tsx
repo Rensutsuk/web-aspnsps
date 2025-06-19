@@ -24,7 +24,8 @@ export default function ImageScroll() {
   ];
 
   return (
-    <div className="py-12 overflow-hidden bg-base-100">
+    <div className=" min-h-screen overflow-hidden bg-base-100 content-center">
+      <h2 className="text-4xl font-bold text-center pb-5">Moments in Images</h2>
       <div className="flex animate-scroll space-x-4 mb-8">
         {[...images1, ...images1].map((imageUrl, index) => (
           <div key={index} className="flex-none w-64 h-48">
