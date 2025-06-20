@@ -2,34 +2,30 @@ import Image from 'next/image';
 
 export default function Hero() {
   return (
-    <div className="hero min-h-screen relative">
-      <div className="relative w-full">
-        <Image 
+    <div className="relative min-h-screen flex items-center justify-center overflow-hidden">
+      {/* Background Image with Gradient Overlay */}
+      <div className="absolute inset-0">
+        <Image
           src="/img/home/hero.jpg"
           alt="Church"
-          className="w-full h-screen object-cover"
-          width={1440}
+          className="w-full h-full object-cover"
+          width={1920}
           height={1080}
           priority
+          quality={90}
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/50 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-white/100 via-white/30 to-transparent" />
       </div>
-      
-      <div className="absolute inset-0 flex flex-col lg:flex-row lg:items-center px-4 sm:px-8 lg:px-12">
-        <div className="max-w-xl text-left text-white w-full lg:w-1/2 mt-24 sm:mt-32 lg:mt-0 flex flex-col h-full lg:h-auto justify-between">
-          <div className="space-y-6 sm:space-y-8 lg:space-y-10">
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-amber-100">
-              Archdiocesan Shrine and Parish of Nuestra Señora del Perpetuo Socorro
-            </h1>
-            <p className="text-base sm:text-lg lg:text-xl text-gray-200">
-              Welcome to our parish community. Join us in prayer and worship.
-            </p>
-          </div>
-          <div className="mt-12 sm:mt-16 mb-20 sm:mb-24 lg:mb-0">
-            <a href="/services" className="btn btn-primary text-white hover:text-amber-100 text-sm sm:text-base lg:btn-lg">
-              Services Offered
-            </a>
-          </div>
+
+      {/* Content Container */}
+      <div className="transform translate-y-40">
+        <div className="relative z-10 text-center px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-grey mb-2 sm:mb-4">
+            Mary: A Haven of Hope for Families
+          </h1>
+          <p className="text-lg sm:text-xl md:text-xl lg:text-2xl text-grey mx-auto">
+            Archdiocesan Shrine and Parish of Nuestra Señora del Perpetuo Socorro
+          </p>
         </div>
       </div>
     </div>
