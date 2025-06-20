@@ -75,7 +75,7 @@ export default function BlogList() {
   };
 
   return (
-    <div className="py-16 bg-base-100">
+    <div className="py-16 bg-white">
       <div className="container mx-auto px-4">
         <h2 className="text-3xl font-bold text-center mb-8">Parish Blog</h2>
         {loading ? (
