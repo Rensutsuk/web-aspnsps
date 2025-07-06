@@ -1,7 +1,7 @@
 'use client';
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FaCalendarAlt, FaClock, FaPray, FaChurch } from 'react-icons/fa';
+import { FaClock, FaPray, FaChurch } from 'react-icons/fa';
 import Image from 'next/image';
 
 export default function MassSchedulePage() {
