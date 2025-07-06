@@ -27,10 +27,10 @@ export default function ImageScroll() {
     <div className=" min-h-screen overflow-hidden bg-base-100 content-center">
       <h2 className="text-3xl font-bold text-center mb-8">Moments in Images</h2>
       <div className="flex animate-scroll space-x-4 mb-8">
-        {[...images1, ...images1].map((imageUrl, index) => (
+        {[...images1, ...images1].map((imageUrl1, index) => (
           <div key={index} className="flex-none w-64 h-48">
             <Image
-              src={imageUrl}
+              src={imageUrl1}
               alt={`Gallery image ${(index % 8) + 1}`}
               className="w-full h-full object-cover rounded-lg"
               width={800}

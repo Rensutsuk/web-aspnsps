@@ -35,7 +35,7 @@ export default function DonatePage() {
             <FaMoneyBillWave className="text-3xl text-primary" />
             <h2 className="text-3xl font-bold">Bank Transfer</h2>
           </div>
-          <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+          <div className="max-w-md mx-auto">
             {bankDetails.map((bank) => (
               <div key={bank.bank} className="card bg-base-200 shadow-lg hover:shadow-xl transition-all">
                 <div className="card-body">
