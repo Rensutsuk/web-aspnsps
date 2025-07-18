@@ -52,11 +52,11 @@ export default function ContactPage() {
               <div className="card-body">
                 <h2 className="card-title text-2xl mb-6">Get in Touch</h2>
                 <div className="space-y-6">
-                  <a href="tel:+1234567890" className="flex items-center gap-4 p-3 rounded-lg hover:bg-base-300 transition-all">
+                  <a href="tel:8741-8010" className="flex items-center gap-4 p-3 rounded-lg hover:bg-base-300 transition-all">
                     <FaPhone className="text-2xl text-primary" />
                     <div>
                       <p className="font-semibold text-lg">Phone</p>
-                      <p className="text-base-content/80">(123) 456-7890</p>
+                      <p className="text-base-content/80">8741-8010</p>
                     </div>
                   </a>
 
@@ -72,7 +72,7 @@ export default function ContactPage() {
                     <FaMapMarkerAlt className="text-2xl text-primary" />
                     <div>
                       <p className="font-semibold text-lg">Address</p>
-                      <p className="text-base-content/80">2042 Calamba Street</p>
+                      <p className="text-base-content/80">2042 Calamba cor. Instruccion Street</p>
                       <p className="text-base-content/80">Sampaloc, Manila</p>
                     </div>
                   </div>

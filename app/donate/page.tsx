@@ -1,12 +1,13 @@
 'use client';
-import { FaHandHoldingHeart, FaMoneyBillWave, FaMobile, FaQrcode } from 'react-icons/fa';
+import { FaHandHoldingHeart, FaMoneyBillWave } from 'react-icons/fa';
 
 export default function DonatePage() {
   const bankDetails = [
     {
       bank: "BPI",
       accountName: "RCAM - Archdiocesan Shrine of Nuestra Señora Del Perpetuo Socorro",
-      accountNumber: "0311018159",
+      altName: "RCAM - NSPS Shrine",
+      accountNumber: "000311-0181-59",
       branch: "BPI Retiro, Quezon City"
     }
   ];
@@ -18,6 +19,8 @@ export default function DonatePage() {
       accountName: "NSPS Parish"
     }
   ];
+
+
 
   return (
     <div className="min-h-screen pt-16">
@@ -42,7 +45,8 @@ export default function DonatePage() {
                   <h3 className="card-title text-xl mb-4">{bank.bank}</h3>
                   <div className="space-y-2">
                     <p><span className="font-semibold">Account Name:</span> {bank.accountName}</p>
-                    <p><span className="font-semibold">Account Number:</span> {bank.accountNumber}</p>
+                    <p><span className="font-semibold">Short Account Name:</span> {bank.altName}</p>
+                    <p><span className="font-semibold">Alternat Number:</span> {bank.accountNumber}</p>
                     <p><span className="font-semibold">Branch:</span> {bank.branch}</p>
                   </div>
                 </div>
@@ -51,7 +55,7 @@ export default function DonatePage() {
           </div>
         </div>
 
-        {/* E-Wallet Section */}
+        {/* E-Wallet Section
         <div className="mb-16">
           <div className="flex items-center justify-center gap-3 mb-8">
             <FaMobile className="text-3xl text-primary" />
@@ -76,7 +80,7 @@ export default function DonatePage() {
               </div>
             ))}
           </div>
-        </div>
+        </div> */}
 
         {/* Other Ways to Give */}
         <div>
@@ -90,10 +94,6 @@ export default function DonatePage() {
               <p className="mb-4">
                 You can also give your donations directly at the parish office during office hours or during mass collections.
               </p>
-              <div className="alert alert-info">
-                <FaQrcode className="text-2xl" />
-                <span>QR codes for donations are also available at the parish office.</span>
-              </div>
             </div>
           </div>
         </div>

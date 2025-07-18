@@ -27,8 +27,17 @@ export default function MassSchedulePage() {
 
   const otherServices = [
     {
+      title: 'Wednesday Devotion to our Mother of Perpetual Help',
+      icon: <FaPray className="text-2xl" />,
+      image: 'https://gv0zzhe6ot.ufs.sh/f/qNNctTpmyN4Mr0o9yb2k1SpQGxfEXm9i8TetMBIULur6dZVH',
+      schedules: [
+        { day: 'Wednesdays', times: ['5:50 AM - 6:15AM', '11:45 AM - 12:15 PM', '5:00 PM - 6:00 PM'] },
+      ],
+    },
+    {
       title: 'Holy Hour',
       icon: <FaPray className="text-2xl" />,
+      image: 'https://gv0zzhe6ot.ufs.sh/f/qNNctTpmyN4Mts4LPR8g6OJa93jKWYuyGorq1AxzPRFMeBEc',
       schedules: [
         { day: 'Wednesdays', times: ['5:00 PM - 6:00 PM'] },
         { day: 'First Friday', times: ['5:00 PM - 6:00 PM'] },
@@ -37,11 +46,13 @@ export default function MassSchedulePage() {
     {
       title: 'Rosary',
       icon: <FaChurch className="text-2xl" />,
+      image: 'https://gv0zzhe6ot.ufs.sh/f/qNNctTpmyN4M0fqdDkNdQm8MAPFokJxzC2Ve5ctlRUWaSyGY',
       schedules: [{ day: 'Daily', times: ['5:45 PM'] }],
     },
     {
       title: 'Morning and Evening Prayer',
       icon: <FaClock className="text-2xl" />,
+      image: 'https://gv0zzhe6ot.ufs.sh/f/qNNctTpmyN4MrpHd3Fb2k1SpQGxfEXm9i8TetMBIULur6dZV',
       schedules: [{ day: 'Weekdays', times: ['15 minutes before mass'] }],
     },
   ];
@@ -53,7 +64,7 @@ export default function MassSchedulePage() {
   };
 
   return (
-    <div className="min-h-content py-16 pt-24 bg-base-100">
+    <div className="min-h-dvh py-16 pt-24 bg-base-100">
       <div className="container mx-auto px-4">
         <h1 className="text-4xl font-bold text-center mb-10">Schedule of Services</h1>
 
@@ -79,32 +90,33 @@ export default function MassSchedulePage() {
               animate="animate"
               exit="exit"
               variants={tabVariants}
-              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+              className="space-y-6"
             >
-              {massSchedules.map((schedule, i) => (
-                <div key={schedule.day} className="card bg-base-200 shadow-md">
-                  <figure>
-                    <Image
-                      src={`https://picsum.photos/400/200?random=${i + 1}`}
-                      alt={`Mass on ${schedule.day}`}
-                      width={400}
-                      height={200}
-                      className="w-full object-cover"
-                    />
-                  </figure>
-                  <div className="card-body">
-                    <h2 className="card-title">{schedule.day}</h2>
-                    <ul className="mt-2 grid grid-cols-2 gap-4">
+              <div className="relative w-full min-h-90">
+                <Image
+                  src="https://gv0zzhe6ot.ufs.sh/f/qNNctTpmyN4MRmF5GzONjIzrhcLZFMG7lqYpdQCf9vaRBPD0"
+                  alt="Mass Schedule"
+                  fill
+                  className="object-cover rounded-lg"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-base-100 to-transparent opacity-60"></div>
+              </div>
+
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                {massSchedules.map((schedule) => (
+                  <div key={schedule.day} className="card bg-base-200 shadow-md p-6">
+                    <h2 className="text-xl font-bold mb-4">{schedule.day}</h2>
+                    <div className="grid grid-cols-2 gap-4">
                       {schedule.times.map((time) => (
-                        <li key={time} className="flex items-center gap-2">
+                        <div key={time} className="flex items-center gap-2">
                           <FaClock className="text-primary" />
-                          {time}
-                        </li>
+                          <span>{time}</span>
+                        </div>
                       ))}
-                    </ul>
+                    </div>
                   </div>
-                </div>
-              ))}
+                ))}
+              </div>
             </motion.div>
           )}
 
@@ -115,32 +127,30 @@ export default function MassSchedulePage() {
               animate="animate"
               exit="exit"
               variants={tabVariants}
-              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+              className="space-y-6"
             >
-              {confessionSchedules.map((schedule, i) => (
-                <div key={schedule.day} className="card bg-base-200 shadow-md">
-                  <figure>
-                    <Image
-                      src={`https://picsum.photos/400/200?grayscale&random=${i + 10}`}
-                      alt={`Confession on ${schedule.day}`}
-                      width={400}
-                      height={200}
-                      className="w-full object-cover"
-                    />
-                  </figure>
-                  <div className="card-body">
-                    <h2 className="card-title">{schedule.day}</h2>
-                    <ul className="space-y-2 mt-2">
-                      {schedule.times.map((time) => (
-                        <li key={time} className="flex items-center gap-2">
-                          <FaClock className="text-primary" />
-                          {time}
-                        </li>
-                      ))}
-                    </ul>
+              <div className="relative w-full min-h-90">
+                <Image
+                  src="https://gv0zzhe6ot.ufs.sh/f/qNNctTpmyN4MouryarDFvpgnQWkasj82S6td5AU4DmGhYlJP"
+                  alt="Confession Schedule"
+                  fill
+                  className="object-cover rounded-lg"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-base-100 to-transparent opacity-60"></div>
+              </div>
+              <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                {confessionSchedules.map((schedule) => (
+                  <div key={schedule.day} className="card bg-base-200 shadow-md p-6">
+                    <h2 className="text-xl font-bold mb-4">{schedule.day}</h2>
+                    {schedule.times.map((time) => (
+                      <div key={time} className="flex items-center gap-2">
+                        <FaClock className="text-primary" />
+                        <span>{time}</span>
+                      </div>
+                    ))}
                   </div>
-                </div>
-              ))}
+                ))}
+              </div>
             </motion.div>
           )}
 
@@ -151,37 +161,41 @@ export default function MassSchedulePage() {
               animate="animate"
               exit="exit"
               variants={tabVariants}
-              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+              className="space-y-6"
             >
-              {otherServices.map((service, i) => (
+              {otherServices.map((service) => (
                 <div key={service.title} className="card bg-base-200 shadow-md">
-                  <figure>
-                    <Image
-                      src={`https://picsum.photos/400/200?blur=1&random=${i + 20}`}
-                      alt={service.title}
-                      width={400}
-                      height={200}
-                      className="w-full object-cover"
-                    />
-                  </figure>
-                  <div className="card-body">
-                    <div className="flex items-center gap-3 mb-2">
-                      {service.icon}
-                      <h2 className="card-title">{service.title}</h2>
+                  <div className="flex flex-col md:flex-row gap-6 lg:min-h-60">
+                    <div className="relative w-full md:w-1/3 h-[200px] md:h-auto">
+                      <Image
+                        src={service.image}
+                        alt={service.title}
+                        fill
+                        sizes="(max-width: 768px) 100vw, 33vw"
+                        className="object-cover rounded-lg"
+                        priority
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-base-100 to-transparent opacity-60"></div>
                     </div>
-                    {service.schedules.map((schedule) => (
-                      <div key={schedule.day} className="mb-3">
-                        <p className="font-semibold">{schedule.day}</p>
-                        <ul className="space-y-1">
-                          {schedule.times.map((time) => (
-                            <li key={time} className="flex items-center gap-2">
-                              <FaClock className="text-primary" />
-                              {time}
-                            </li>
-                          ))}
-                        </ul>
+                    <div className="flex-1 m-6">
+                      <div className="flex items-center gap-3 mb-6">
+                        {service.icon}
+                        <h2 className="text-xl font-bold">{service.title}</h2>
                       </div>
-                    ))}
+                      <div className="space-y-4">
+                        {service.schedules.map((schedule) => (
+                          <div key={schedule.day}>
+                            <p className="font-semibold mb-2">{schedule.day}</p>
+                            {schedule.times.map((time) => (
+                              <div key={time} className="flex items-center gap-2 pb-2">
+                                <FaClock className="text-primary" />
+                                <span>{time}</span>
+                              </div>
+                            ))}
+                          </div>
+                        ))}
+                      </div>
+                    </div>
                   </div>
                 </div>
               ))}

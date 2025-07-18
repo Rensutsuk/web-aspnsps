@@ -10,10 +10,10 @@ export default function AboutPage() {
           <div className="space-y-10">
             <div className="prose max-w-none bg-base-200 p-8 rounded-xl shadow-lg">
               <h2 className="text-3xl font-bold mb-6">Our History</h2>
-              <p className="text-base leading-relaxed">
+              <p className="text-base text-justify leading-relaxed">
                 From being a part of the Parish of Espiritu Santo, the newborn parish erected on August 28 1951 by His Eminence Manila Archbishop Gabriel Reyes and Fr. Candido Bernal was the first parish priest and was installed by Msgr. Narciso Gatpaydan, Vicar Forane of Espiritu Santo.
               </p>
-              <p className="text-base leading-relaxed mt-4">
+              <p className="text-base text-justify leading-relaxed mt-4">
                 Fr. Bernal held his first public mass, &apos;Misa pro populo&apos; on October 4 1951 in a chapel that preceded the parish, the Resurreccion chapel. He rent temporarily in a dormitory in Simoun and Crisostomo streets.
               </p>
               <div className="flex justify-end mt-6">
@@ -25,7 +25,7 @@ export default function AboutPage() {
 
             <div className="prose max-w-none bg-base-200 p-8 rounded-xl shadow-lg">
               <h2 className="text-3xl font-bold mb-6">Our Mission</h2>
-              <p className="text-base leading-relaxed">
+              <p className="text-base text-justify leading-relaxed">
                 The Archdiocesan Shrine and Parish of Nuestra Señora del Perpetuo Socorro stands in the midst of the City of Manila as a religious sanctuary, inviting devotees and pilgrims from all walks of life to reflection, renewal, and reconciliation. As a house of prayer, the Shrine offers individuals, as well as groups of the faithful, opportunities for the celebration of the faith and an environment conducive to personal example of the Blessed Virgin Mary, recounted in word and art, becomes an important and effective instrument to inspire, encourage and strengthen faith among the faithful.
               </p>
             </div>

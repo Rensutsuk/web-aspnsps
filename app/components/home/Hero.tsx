@@ -2,13 +2,13 @@ import Image from 'next/image';
 
 export default function Hero() {
   return (
-    <div className="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <div className="relative min-h-screen flex items-center justify-center overflow-hidden mt-16">
       {/* Background Image with Gradient Overlay */}
       <div className="absolute inset-0">
         <Image
-          src="/img/home/hero.jpg"
+          src="https://gv0zzhe6ot.ufs.sh/f/qNNctTpmyN4M8mZ4duxgQYGl2SdnAKpONhLTcBW7Zzso5iR1"
           alt="Church"
-          className="w-full h-full object-cover"
+          className="w-full h-full object-cover object-top"
           width={1920}
           height={1080}
           priority

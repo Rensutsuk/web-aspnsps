@@ -36,6 +36,7 @@ export default function Navbar() {
             <li><Link href="/about">About</Link></li>
             <li><Link href="/schedule">Mass Schedule</Link></li>
             <li><Link href="/services">Services</Link></li>
+            <li><Link href="/marriage">Marriage</Link></li>
             <li><Link href="/ministries">Ministries</Link></li>
             <li><Link href="/donate">Donate</Link></li>
             <li><Link href="/contact">Contact</Link></li>
@@ -93,6 +94,15 @@ export default function Navbar() {
                 className="text-2xl py-4 text-center text-primary-content hover:bg-primary-focus"
               >
                 Services
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/marriage"
+                onClick={() => setIsMenuOpen(false)}
+                className="text-2xl py-4 text-center text-primary-content hover:bg-primary-focus"
+              >
+                Marriage
               </Link>
             </li>
             <li>
