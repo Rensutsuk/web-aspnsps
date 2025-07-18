@@ -15,9 +15,9 @@ export default function Footer() {
       <nav>
         <h6 className="footer-title">Contact</h6>
         <div className="space-y-2">
-          <a href="tel:+1234567890" className="flex items-center gap-2 hover:text-primary transition-colors">
+          <a href="tel:8741-8010" className="flex items-center gap-2 hover:text-primary transition-colors">
             <FaPhone size={16} />
-            <span>(123) 456-7890</span>
+            <span>8741-8010</span>
           </a>
           <a href="mailto:nsps_parish@yahoo.com" className="flex items-center gap-2 hover:text-primary transition-colors">
             <FaEnvelope size={16} />

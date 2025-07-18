@@ -1,3 +1,5 @@
+'use client'
+
 import Image from "next/image";
 
 export default function MinistriesPage() {
@@ -5,25 +7,25 @@ export default function MinistriesPage() {
     {
       title: "Ministry of Altar Servers",
       description: "Dedicated young individuals who assist the priest during Mass and other liturgical celebrations. They help maintain the sanctity and smooth flow of church ceremonies through their reverent service at the altar.",
-      image: "https://picsum.photos/800/600?random=1",
-      activities: ["Liturgical Service Training", "Spiritual Formation", "Monthly Meetings", "Annual Retreat"]
+      image: "https://gv0zzhe6ot.ufs.sh/f/qNNctTpmyN4MjwK83ngi69LvoVgucWKqGERr5ebMafhI70HY",
+      activities: ["Liturgical Service Training", "Spiritual Formation", "Monthly Meetings"]
     },
     {
       title: "Lectors and Commentators Ministry",
       description: "Proclaiming God's Word and guiding the congregation through the liturgy. This ministry ensures clear and meaningful delivery of Scripture readings and liturgical announcements during Mass.",
-      image: "https://picsum.photos/800/600?random=2",
+      image: "https://gv0zzhe6ot.ufs.sh/f/qNNctTpmyN4Mo3gaigDFvpgnQWkasj82S6td5AU4DmGhYlJP",
       activities: ["Scripture Reading Workshop", "Voice Training", "Liturgical Formation", "Regular Prayer Meetings"]
     },
     {
       title: "Music Ministry",
       description: "Enhancing liturgical celebrations through sacred music. Our choir members and musicians dedicate their time and talents to lead the congregation in worship through traditional and contemporary Catholic music.",
-      image: "https://picsum.photos/800/600?random=3",
+      image: "https://gv0zzhe6ot.ufs.sh/f/qNNctTpmyN4MvNGQSgtLotzC8HpchI9qQ54wPJ7uVRb31gK0",
       activities: ["Choir Practice", "Music Theory Classes", "Voice Training", "Special Liturgical Celebrations"]
     },
     {
-      title: "Extra Ordinary Ministers of Holy Communion",
+      title: "Extraordinary Ministers of Holy Communion",
       description: "Assisting in the distribution of Holy Communion during Mass and bringing the Blessed Sacrament to the sick and homebound members of our community.",
-      image: "https://picsum.photos/800/600?random=4",
+      image: "https://gv0zzhe6ot.ufs.sh/f/qNNctTpmyN4Mcjr1n7Zu0PfDC8YWtVk2nQaTg4wx9bE3SyAX",
       activities: ["Eucharistic Formation", "Pastoral Care Training", "Regular Spiritual Retreats", "Communion Service to the Sick"]
     },
     {
@@ -56,10 +58,10 @@ export default function MinistriesPage() {
     <div className="min-h-screen pt-16 bg-gradient-to-br from-base-200 to-base-100">
       <div className="container mx-auto px-4 py-12">
         <h1 className="text-4xl font-bold text-center mb-16 text-primary">Our Ministries</h1>
-        
+
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {ministries.map((ministry, index) => (
-            <div 
+            <div
               key={index}
               className="group perspective">
               <div className="relative transform-style-3d transition-transform duration-1000 group-hover:rotate-y-180">
@@ -78,7 +80,7 @@ export default function MinistriesPage() {
                     </div>
                     <div className="p-6">
                       <h2 className="text-2xl font-bold mb-3 text-primary">{ministry.title}</h2>
-                      <p className="text-base-content/80 line-clamp-4">{ministry.description}</p>
+                      <p className="text-base-content/80 text-justify line-clamp-6">{ministry.description}</p>
                     </div>
                     <div className="absolute bottom-4 left-0 right-0 flex justify-center">
                       <span className="text-sm text-primary-content/60 group-hover:text-primary-content/80 transition-colors duration-300">
@@ -87,14 +89,14 @@ export default function MinistriesPage() {
                     </div>
                   </div>
                 </div>
-                
+
                 {/* Back of the card */}
                 <div className="absolute inset-0 backface-hidden rotate-y-180">
                   <div className="h-[450px] bg-primary text-primary-content rounded-xl shadow-2xl p-6 flex flex-col">
                     <h3 className="text-2xl font-bold mb-6 text-center">Activities</h3>
                     <ul className="space-y-4 flex-grow">
                       {ministry.activities.map((activity, idx) => (
-                        <li 
+                        <li
                           key={idx}
                           className="flex items-center space-x-3 opacity-0 animate-fade-in"
                           style={{ animationDelay: `${idx * 150}ms` }}
@@ -116,6 +118,34 @@ export default function MinistriesPage() {
           ))}
         </div>
       </div>
+      <div className="flex flex-col max-w-md center mx-auto px-4 py-8">
+        <h1 className="text-3xl font-bold text-center mb-8">Join a Ministry</h1>
+        <button
+          className="btn btn-primary btn-lg shadow-lg"
+          onClick={() => (document.getElementById('join_ministry_modal') as HTMLDialogElement)?.showModal()}
+        >
+          Apply Here
+        </button>
+      </div>
+
+      <dialog id="join_ministry_modal" className="modal">
+        <div className="modal-box w-11/12 max-w-5xl h-[90vh] overflow-y-auto">
+          <form method="dialog">
+            <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2 z-10">✕</button>
+          </form>
+          <iframe 
+            className="w-full h-full"
+            src="https://docs.google.com/forms/d/e/1FAIpQLSdJzRlBDTWsfZjpqkkrj7zS0XBZ2U08kCS2atzM3mIIuAligQ/viewform?embedded=true" 
+            style={{
+              minHeight: '80vh',
+              maxHeight: '85vh'
+            }}
+            >Loading…</iframe>
+        </div>
+        <form method="dialog" className="modal-backdrop">
+          <button>close</button>
+        </form>
+      </dialog>
     </div>
   );
 }

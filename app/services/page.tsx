@@ -50,13 +50,13 @@ export default function ServicesPage() {
         group: {
           title: "Group Baptism",
           schedule: "Every Sunday @ 11:00am",
-          seminar: "Sunday @ 9:00am",
-          donation: "P1,200 plus P100 per additional sponsor, P120 with candle"
+          seminar: "Sunday @ 9:30am",
+          donation: "Any amount, plus P100 per additional sponsor, P120 with candle"
         },
         special: {
           title: "Special/Individual Baptism",
           schedule: "Tuesday to Saturday by appointment",
-          seminar: "30 minutes before the set time and date of baptism",
+          seminar: "1 hour before the set time and date of baptism",
           donation: "P1,500 plus P100 per additional sponsor, P120 with candle"
         }
       },
@@ -132,9 +132,8 @@ export default function ServicesPage() {
       shortDescription: "Honor and commemorate your loved ones with a dignified Catholic funeral service.",
       description: "The Catholic funeral rites are a way for the Church to offer worship, praise, and thanksgiving to God for the gift of a life which has now been returned to Him.",
       requirements: [
-        "Death Certificate",
-        "Proof of Catholic faith of the deceased",
-        "Contact parish immediately after death"
+        "Photocopy of Registered Death Certificate",
+        "Contact the Parish Office for Appointment"
       ],
       contactInfo: "For immediate assistance, please contact our Parish Office 24/7 at (123) 456-7892",
       image: "https://picsum.photos/600/800?random=3"
@@ -143,11 +142,7 @@ export default function ServicesPage() {
       title: "House Blessing",
       shortDescription: "Invite God's presence and blessing into your home through this meaningful Catholic tradition.",
       description: "House blessings are a way to sanctify our homes and dedicate them to God's purposes. This tradition helps make our homes places of prayer and peace.",
-      requirements: [
-        "Schedule appointment",
-        "Prepare holy water container (optional)",
-        "Gather family members if possible"
-      ],
+      requirements: [],
       contactInfo: "To schedule a house blessing, contact the Parish Office at (123) 456-7893",
       image: "https://picsum.photos/600/800?random=4"
     },
@@ -163,33 +158,6 @@ export default function ServicesPage() {
       ],
       contactInfo: "For urgent sick calls, please contact our Parish Office at (123) 456-7894",
       image: "https://picsum.photos/600/800?random=5"
-    },
-    {
-      title: "Counseling",
-      shortDescription: "Seek spiritual guidance and pastoral counseling from our parish priests.",
-      description: "Our parish offers pastoral counseling services to help individuals and families navigate life's challenges through spiritual guidance and support.",
-      requirements: [
-        "Advance appointment required",
-        "Initial consultation form",
-        "Parish registration (for regular counseling)",
-        "Maintain confidentiality agreement"
-      ],
-      contactInfo: "To schedule a counseling session, please contact our Parish Office at (123) 456-7895",
-      image: "https://picsum.photos/600/800?random=6"
-    },
-    {
-      title: "Street Mass",
-      shortDescription: "Bring the celebration of the Holy Mass to your local community.",
-      description: "Street Masses help bring the Church closer to the community, allowing those who might not regularly attend Mass to participate in the celebration of the Eucharist in their own neighborhood.",
-      requirements: [
-        "Written request from the community leader",
-        "Proposed date and time",
-        "Location assessment",
-        "Minimum number of participating families",
-        "Basic altar setup requirements"
-      ],
-      contactInfo: "To request a Street Mass, please contact our Parish Office at (123) 456-7896",
-      image: "https://picsum.photos/600/800?random=7"
     }
   ];
 
