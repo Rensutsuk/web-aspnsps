@@ -1,3 +1,0 @@
-ancestorEntries = ["app/donate/page.tsx", "app/ministries/page.tsx", "app/services/page.tsx"]
-ourEntries = ["app/donate/page.tsx", "app/marriage/page.tsx", "app/ministries/page.tsx", "app/services/page.tsx"]
-theirEntries = ["app/donate/page.tsx", "app/marriage/page.tsx", "app/ministries/page.tsx", "app/services/page.tsx"]
