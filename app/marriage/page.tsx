@@ -33,7 +33,7 @@ export default function Marriage() {
             <div className="bg-base-200 p-6 rounded-xl shadow-md">
               <h3 className="text-xl font-bold mb-4">Required Documents</h3>
               <ul className="space-y-3 list-disc list-inside">
-                <li>New copy of <strong>Baptismal and Confirmation certificates</strong> (valid for 6 months) with annotation "FOR MARRIAGE PURPOSES ONLY"</li>
+                <li>New copy of <strong>Baptismal and Confirmation certificates</strong> (valid for 6 months) with annotation &quot;FOR MARRIAGE PURPOSES ONLY&quot;</li>
                 <li>PSA Certificate of Live Birth</li>
                 <li>PSA Certificate of No Marriage (CENOMAR)</li>
                 <li>Marriage License from Civil Registry (valid for 120 days)</li>
@@ -83,8 +83,8 @@ export default function Marriage() {
                 <h4 className="font-bold">For Filipino & Foreigner:</h4>
                 <ul className="list-disc list-inside">
                   <li>Clearance from Chancery Office of the Archdiocese</li>
-                  <li>Certificate of freedom to marry from foreigner's parish</li>
-                  <li>Legal capacity to marry from foreigner's consulate</li>
+                  <li>Certificate of freedom to marry from foreigner&apos;s parish</li>
+                  <li>Legal capacity to marry from foreigner&apos;s consulate</li>
                 </ul>
               </div>
               
@@ -154,12 +154,14 @@ export default function Marriage() {
         <section className="mb-16">
           <h2 className="text-3xl font-bold text-center mb-8">Wedding Entourage</h2>
           
-          <div className="relative w-full h-[500px] mb-8 rounded-xl overflow-hidden shadow-xl">
+          <div className="relative w-full h-[500px] mb-8 rounded-xl overflow-hidden shadow-xl bg-white">
             <Image 
-              src="https://picsum.photos/1200/500?random=4" 
+              src="https://gv0zzhe6ot.ufs.sh/f/qNNctTpmyN4MR2HxXpONjIzrhcLZFMG7lqYpdQCf9vaRBPD0" 
               alt="Wedding Entourage" 
-              fill 
-              className="object-cover"
+              fill
+              sizes="100vw"
+              className="object-contain w-full h-full"
+              priority
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent/30 flex items-end">
               <div className="p-8 text-white">

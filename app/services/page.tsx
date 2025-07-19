@@ -7,7 +7,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 export default function ServicesPage() {
   const [currentPage, setCurrentPage] = useState(1);
   const servicesPerPage = 4;
-  
+
   const services = [
     {
       title: "Baptism",
@@ -69,63 +69,62 @@ export default function ServicesPage() {
         "Please wear proper Church attire (no shorts & no sleeveless)"
       ],
       contactInfo: "Please contact the Parish Office for more information and registration.",
-      image: "https://picsum.photos/600/800?random=1"
+      image: "https://gv0zzhe6ot.ufs.sh/f/qNNctTpmyN4MDdJ4U8IT8LqmsZi6thfWXR5ldxIYOU1VAQb3"
     },
     {
-      title: "Wedding",
-      shortDescription: "Celebrate the sacred bond of marriage in the presence of God and your loved ones in our beautiful church.",
-      description: "The Sacrament of Marriage is a covenant, which is more than a contract. Through the Sacrament of Matrimony, the Church teaches that Jesus Christ has elevated the love between a man and woman to a new level.",
+      title: "Releasing Documents",
+      shortDescription: "Request official church certificates and documents for sacramental records.",
+      description: "The Parish Office provides official certificates for sacraments received at our church, including Baptism, Confirmation, Marriage, and Death certificates. These documents are often required for receiving other sacraments, school enrollment, or legal purposes.",
       requirements: {
-        regular: {
-          title: "Regular Marriage Requirements",
+        baptismal: {
+          title: "Baptismal Certificate",
           items: [
-            "Marriage License",
-            "Baptismal and Confirmation Certificates with annotation 'For Marriage Purposes' (newly issued)",
-            "PSA Certificate of Live Birth",
-            "PSA Certificate of No Marriage (CENOMAR)",
-            "Canonical Interview - by appointment",
-            "Pre-Cana/Marriage Preparation Seminar - to be scheduled",
-            "Marriage Banns with permission if the bride belongs to another parish",
-            "List of Principal Sponsors"
+            "Valid ID of the requestor",
+            "Full name of the person in the certificate",
+            "Approximate date of baptism",
+            "Parents' complete names",
+            "Purpose of the certificate (for annotation)"
           ]
         },
-        civillyMarried: {
-          title: "For Civilly Married Couples",
+        confirmation: {
+          title: "Confirmation Certificate",
           items: [
-            "Certified True Copy of Marriage Contract (PSA)",
-            "Baptismal and Confirmation Certificates with annotation 'For Marriage Purposes' (newly issued)",
-            "PSA Certificate of Live Birth",
-            "Canonical Interview - by appointment",
-            "Pre-Cana/Marriage Preparation Seminar - to be scheduled",
-            "Marriage Banns with permission if the bride belongs to another parish",
-            "List of Principal Sponsors"
+            "Valid ID of the requestor",
+            "Full name of the person in the certificate",
+            "Approximate date of confirmation",
+            "Parents' complete names",
+            "Purpose of the certificate"
           ]
         },
-        cohabiting: {
-          title: "For Couples Living Together (5+ years)",
+        marriage: {
+          title: "Marriage Certificate",
           items: [
-            "Affidavit of Cohabitant (written statement under oath of living together as husband and wife for at least 5 years)",
-            "Baptismal and Confirmation Certificates with annotation 'For Marriage Purposes' (newly issued)",
-            "PSA Certificate of Live Birth",
-            "PSA Certificate of No Marriage (CENOMAR)",
-            "Canonical Interview - by appointment",
-            "Marriage Banns with permission if the bride belongs to another parish",
-            "Pre-Cana/Marriage Preparation Seminar - to be scheduled",
-            "List of Principal Sponsors"
+            "Valid ID of the requestor (must be one of the spouses or an immediate family member)",
+            "Complete names of both spouses",
+            "Approximate date of marriage",
+            "Purpose of the certificate"
           ]
         },
-        foreignMarriage: {
-          title: "Marriage with Foreign National",
+        death: {
+          title: "Death Certificate",
           items: [
-            "Clearance from the Chancery Office of the Archdiocese of Manila",
-            "Located at: 121 Arzobispado St., Intramuros, Manila",
-            "Contact: Tel. No. 8527-3955 / 8527-7631-36",
-            "All other regular marriage requirements also apply"
+            "Valid ID of the requestor (must be an immediate family member)",
+            "Complete name of the deceased",
+            "Approximate date of death/funeral Mass",
+            "Purpose of the certificate"
           ]
         }
       },
-      contactInfo: "For wedding inquiries, please contact our Wedding Coordinator at (123) 456-7891 or wedding@parish.com",
-      image: "https://picsum.photos/600/800?random=2"
+      reminders: [
+        "Please bring a valid ID when requesting certificates",
+        "For certificates with annotations (e.g., for marriage purposes), please specify when requesting",
+        "Certificates are typically ready within 2-3 working days for regular processing",
+        "Express processing is available for urgent needs (same-day release)",
+        "For certificates from other parishes, please contact that specific parish directly",
+        "Authorized representatives must present an authorization letter and valid ID"
+      ],
+      contactInfo: "For document requests, please visit the Parish Office or call (123) 456-7895 during office hours.",
+      image: "https://gv0zzhe6ot.ufs.sh/f/qNNctTpmyN4Muld8mTytIDoBjJxUblWz0sKTOdm7Vr8fYgeS"
     },
     {
       title: "Funeral Mass",
@@ -136,7 +135,7 @@ export default function ServicesPage() {
         "Contact the Parish Office for Appointment"
       ],
       contactInfo: "For immediate assistance, please contact our Parish Office 24/7 at (123) 456-7892",
-      image: "https://picsum.photos/600/800?random=3"
+      image: "https://gv0zzhe6ot.ufs.sh/f/qNNctTpmyN4MIs8U1BV1g5UAuSbTnfMpkq496XaN8eK2d3mi"
     },
     {
       title: "House Blessing",
@@ -144,7 +143,7 @@ export default function ServicesPage() {
       description: "House blessings are a way to sanctify our homes and dedicate them to God's purposes. This tradition helps make our homes places of prayer and peace.",
       requirements: [],
       contactInfo: "To schedule a house blessing, contact the Parish Office at (123) 456-7893",
-      image: "https://picsum.photos/600/800?random=4"
+      image: "https://gv0zzhe6ot.ufs.sh/f/qNNctTpmyN4MHyTgDSs7GSuO350hliR2PAUkwfTqjWtKgBIo"
     },
     {
       title: "Sick Call",
@@ -157,7 +156,7 @@ export default function ServicesPage() {
         "Immediate family member's consent"
       ],
       contactInfo: "For urgent sick calls, please contact our Parish Office at (123) 456-7894",
-      image: "https://picsum.photos/600/800?random=5"
+      image: "https://gv0zzhe6ot.ufs.sh/f/qNNctTpmyN4MjaX1IVgi69LvoVgucWKqGERr5ebMafhI70HY"
     }
   ];
 
@@ -183,7 +182,17 @@ export default function ServicesPage() {
                 exit={{ opacity: 0, y: -20 }}
                 transition={{ duration: 0.3, delay: index * 0.1 }}
               >
-                <ServiceCard {...service} />
+                <ServiceCard
+                  key={service.title}
+                  title={service.title}
+                  shortDescription={service.shortDescription}
+                  description={service.description}
+                  requirements={service.requirements as any}
+                  schedules={service.schedules as any}
+                  reminders={service.reminders}
+                  contactInfo={service.contactInfo}
+                  image={service.image}
+                />
               </motion.div>
             ))}
           </AnimatePresence>
@@ -191,7 +200,7 @@ export default function ServicesPage() {
 
         {/* Pagination Controls */}
         <div className="flex justify-center gap-2">
-          <button 
+          <button
             onClick={() => paginate(currentPage - 1)}
             disabled={currentPage === 1}
             className="btn btn-circle btn-outline transition-transform duration-200 hover:scale-110 disabled:scale-100"
@@ -203,17 +212,16 @@ export default function ServicesPage() {
             <button
               key={number}
               onClick={() => paginate(number)}
-              className={`btn btn-circle transition-all duration-200 hover:scale-110 ${
-                currentPage === number 
-                ? 'btn-primary scale-110 shadow-lg' 
-                : 'btn-outline hover:shadow-md'
-              }`}
+              className={`btn btn-circle transition-all duration-200 hover:scale-110 ${currentPage === number
+                  ? 'btn-primary scale-110 shadow-lg'
+                  : 'btn-outline hover:shadow-md'
+                }`}
             >
               {number}
             </button>
           ))}
 
-          <button 
+          <button
             onClick={() => paginate(currentPage + 1)}
             disabled={currentPage === totalPages}
             className="btn btn-circle btn-outline transition-transform duration-200 hover:scale-110 disabled:scale-100"

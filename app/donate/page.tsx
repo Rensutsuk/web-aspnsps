@@ -12,16 +12,14 @@ export default function DonatePage() {
     }
   ];
 
-  const eWallets = [
-    {
-      name: "GCash",
-      number: "0912 345 6789",
-      accountName: "NSPS Parish"
-    }
-  ];
-
-
-
+  // const eWallets = [
+  //   {
+  //     name: "GCash",
+  //     number: "0912 345 6789",
+  //     accountName: "NSPS Parish"
+  //   }
+  // ];
+  
   return (
     <div className="min-h-screen pt-16">
       <div className="container mx-auto px-4 py-12">

@@ -80,10 +80,10 @@ export default function MinistriesPage() {
                     </div>
                     <div className="p-6">
                       <h2 className="text-2xl font-bold mb-3 text-primary">{ministry.title}</h2>
-                      <p className="text-base-content/80 text-justify line-clamp-6">{ministry.description}</p>
+                      <p className="text-base-content/80 text-justify line-clamp-5">{ministry.description}</p>
                     </div>
                     <div className="absolute bottom-4 left-0 right-0 flex justify-center">
-                      <span className="text-sm text-primary-content/60 group-hover:text-primary-content/80 transition-colors duration-300">
+                      <span className="text-sm text-black/60 group-hover:text-black/80 transition-colors duration-300">
                         Hover to see activities
                       </span>
                     </div>
@@ -108,7 +108,7 @@ export default function MinistriesPage() {
                     </ul>
                     <div className="text-center mt-4">
                       <span className="text-sm opacity-60">
-                        Click to flip back
+                        Click outside box to flip back
                       </span>
                     </div>
                   </div>
