@@ -22,9 +22,8 @@ export default function Navbar() {
             <Image
               src="/logo.png"
               alt="ASPNSPS Logo"
-              width={50}
-              height={50}
-              className='outline-solid outline-white outline-5 rounded-full'
+              width={35}
+              height={35}
             />
           </div>
           <Link href="/" className="btn btn-ghost text-xl">ASPNSPS</Link>
