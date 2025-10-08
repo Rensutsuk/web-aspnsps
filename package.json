@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@hcaptcha/react-hcaptcha": "^1.12.0",
-    "framer-motion": "^12.5.0",
+    "framer-motion": "^12.23.22",
     "gray-matter": "^4.0.3",
     "next": "^15.2.4",
     "react": "^19.0.0",

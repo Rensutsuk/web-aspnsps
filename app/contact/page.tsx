@@ -1,6 +1,7 @@
 'use client';
 import { FaPhone, FaEnvelope, FaMapMarkerAlt, FaClock, FaCalendarAlt } from 'react-icons/fa';
 import { useState } from 'react';
+import Script from 'next/script';
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -10,10 +11,22 @@ export default function ContactPage() {
   });
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
+  const [captchaError, setCaptchaError] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
+    setCaptchaError(false);
+
+    // Get the hCaptcha response token
+    const hCaptchaResponse = document.querySelector('textarea[name=h-captcha-response]') as HTMLTextAreaElement;
+
+    // Check if captcha is filled
+    if (!hCaptchaResponse?.value) {
+      setCaptchaError(true);
+      setLoading(false);
+      return;
+    }
 
     try {
       const response = await fetch('https://api.web3forms.com/submit', {
@@ -23,15 +36,18 @@ export default function ContactPage() {
         },
         body: JSON.stringify({
           access_key: '573083e4-de82-430c-bf51-6113280f110f',
-          ...formData
+          ...formData,
+          'h-captcha-response': hCaptchaResponse.value
         })
       });
 
       if (response.ok) {
+        console.log(response);
         setSuccess(true);
         setFormData({ name: '', email: '', message: '' });
         // Auto hide success modal after 3 seconds
         setTimeout(() => setSuccess(false), 3000);
+        window.location.reload();
       }
     } catch (error) {
       console.error('Error:', error);
@@ -150,6 +166,8 @@ export default function ContactPage() {
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                       placeholder="your.email@example.com"
+                      pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}"
+                      title="Please enter a valid email address"
                       required
                     />
                   </div>
@@ -165,6 +183,17 @@ export default function ContactPage() {
                       placeholder="Write your message here..."
                       required
                     ></textarea>
+                  </div>
+                  
+                  {/* Add hCaptcha div here */}
+                  <div className="form-control w-full">
+                    <div className="h-captcha" data-captcha="true"></div>
+                    {captchaError && (
+                      <div className="alert alert-error mt-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                        <span>Please complete the captcha</span>
+                      </div>
+                    )}
                   </div>
 
                   <button
@@ -212,10 +241,16 @@ export default function ContactPage() {
           </h3>
           <p className="py-4">Thank you for contacting us. We&apos;ll get back to you soon.</p>
           <div className="modal-action">
-            <button className="btn btn-ghost btn-sm" onClick={() => setSuccess(false)}>Close</button>
+            <button className="btn btn-ghost btn-sm" onClick={() => {
+              setSuccess(false);
+              window.location.reload();
+            }}>Close</button>
           </div>
         </div>
       </dialog>
+      
+      {/* Add Web3Forms script */}
+      <Script src="https://web3forms.com/client/script.js" strategy="afterInteractive" />
     </div>
   );
 }

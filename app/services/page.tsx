@@ -1,18 +1,15 @@
 'use client';
-
 import { useState } from 'react';
 import ServiceCard from '../components/services/ServiceCard';
 import { motion, AnimatePresence } from 'framer-motion';
-
 export default function ServicesPage() {
   const [currentPage, setCurrentPage] = useState(1);
   const servicesPerPage = 4;
-
   const services = [
     {
       title: "Baptism",
       shortDescription: "Begin your child's journey in faith through the sacred sacrament of Baptism.",
-      description: "The Sacrament of Baptism is the first step in a lifelong journey of commitment and discipleship. Whether we are baptized as infants or adults, Baptism is the Church's way of celebrating and enacting the embrace of God.",
+      description: "Holy Baptism is the basis of the whole Christian life, the gateway to life in the Spirit (vitae spiritualis ianua), and the door which gives access to the other sacraments. Through Baptism we are freed from sin and reborn as sons of God; we become members of Christ, are incorporated into the Church and made sharers in her mission: \"Baptism is the sacrament of regeneration through water in the word.\"",
       requirements: {
         infant02: {
           title: "Infant Baptism (0-2 years)",
@@ -40,7 +37,7 @@ export default function ServicesPage() {
             "Certificate of NO BAPTISM from nearby churches where the child resides",
             "Permission letter from your Parish Church (if not a parishioner of NSPS Shrine)",
             "Interview with the Rector/Parish Priest",
-            "Must undergo Catechism (Basic Catholic Christian Doctrine)",
+            "Must undergo Catechism (Basic Catholic Christian Doctrine)", 
             "Parents and Godparents must attend the Pre-Baptism seminar",
             "Register at least one week before the day of Baptism"
           ]
@@ -118,8 +115,6 @@ export default function ServicesPage() {
       reminders: [
         "Please bring a valid ID when requesting certificates",
         "For certificates with annotations (e.g., for marriage purposes), please specify when requesting",
-        "Certificates are typically ready within 2-3 working days for regular processing",
-        "Express processing is available for urgent needs (same-day release)",
         "For certificates from other parishes, please contact that specific parish directly",
         "Authorized representatives must present an authorization letter and valid ID"
       ],
@@ -128,12 +123,9 @@ export default function ServicesPage() {
     },
     {
       title: "Funeral Mass",
-      shortDescription: "Honor and commemorate your loved ones with a dignified Catholic funeral service.",
-      description: "The Catholic funeral rites are a way for the Church to offer worship, praise, and thanksgiving to God for the gift of a life which has now been returned to Him.",
-      requirements: [
-        "Photocopy of Registered Death Certificate",
-        "Contact the Parish Office for Appointment"
-      ],
+      shortDescription: "Honor and commemorate your loved ones.",
+      description: "At the death of a Christian, whose life of faith was begun in the waters of baptism and strengthened at the eucharistic table, the Church intercedes on behalf of the deceased because of its confident belief that death is not the end nor does it break the bonds forged in life. The Church also ministers to the sorrowing and consoles them in the funeral rites with the comforting word of God and the sacrament of the eucharist.",
+      requirements: [],
       contactInfo: "For immediate assistance, please contact our Parish Office 24/7 at (123) 456-7892",
       image: "https://gv0zzhe6ot.ufs.sh/f/qNNctTpmyN4MIs8U1BV1g5UAuSbTnfMpkq496XaN8eK2d3mi"
     },

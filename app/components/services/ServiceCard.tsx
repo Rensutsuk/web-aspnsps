@@ -58,6 +58,11 @@ export default function ServiceCard({
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [activeTab, setActiveTab] = useState('info');
 
+  // Check if requirements is empty
+  const hasRequirements = Array.isArray(requirements) 
+    ? requirements.length > 0 
+    : Object.keys(requirements || {}).length > 0;
+
   return (
     <>
       <div className="group relative cursor-pointer h-full" onClick={() => setIsModalOpen(true)}>
@@ -102,12 +107,14 @@ export default function ServiceCard({
             >
               <MdInfo className="w-4 h-4" /> Overview
             </button>
-            <button 
-              className={`tab gap-2 ${activeTab === 'requirements' ? 'tab-active' : ''}`}
-              onClick={() => setActiveTab('requirements')}
-            >
-              <FaClipboardList className="w-4 h-4" /> Requirements
-            </button>
+            {hasRequirements && (
+              <button 
+                className={`tab gap-2 ${activeTab === 'requirements' ? 'tab-active' : ''}`}
+                onClick={() => setActiveTab('requirements')}
+              >
+                <FaClipboardList className="w-4 h-4" /> Requirements
+              </button>
+            )}
             {schedules && (
               <button 
                 className={`tab gap-2 ${activeTab === 'schedules' ? 'tab-active' : ''}`}
@@ -142,7 +149,7 @@ export default function ServiceCard({
             )}
 
             {/* Requirements Tab */}
-            {activeTab === 'requirements' && (
+            {activeTab === 'requirements' && hasRequirements && (
               <div className="space-y-4">
                 {Array.isArray(requirements) ? (
                   <ul className="steps steps-vertical w-full">
