@@ -1,64 +1,54 @@
-import { promises as fs } from 'fs';
-import path from 'path';
-import matter from 'gray-matter';
 import { notFound } from 'next/navigation';
+import { unstable_cache } from 'next/cache'
 import { remark } from 'remark';
 import html from 'remark-html';
 import Image from 'next/image';
 import Link from 'next/link';
+import { prisma } from '@/app/db'
 
-// Define the type for the blog post
 type BlogPost = {
   slug: string;
   title: string;
   date: string;
   author: string;
   excerpt: string;
-  featuredImage: string;
+  featuredImage: string | null;
   content: string;
 };
 
-// Generate static params for all blog posts
-export async function generateStaticParams() {
-  const blogsDirectory = path.join(process.cwd(), 'public/blogs');
-  const filenames = await fs.readdir(blogsDirectory);
-  const markdownFiles = filenames.filter(file => file.endsWith('.md'));
+const getBlogPost = unstable_cache(
+  async (slug: string): Promise<BlogPost | null> => {
+    const post = await prisma.blogPost.findUnique({
+      where: { slug },
+      select: {
+        slug: true,
+        title: true,
+        date: true,
+        author: true,
+        excerpt: true,
+        featuredImage: true,
+        content: true,
+        published: true,
+      },
+    })
 
-  return markdownFiles.map(filename => ({
-    slug: filename.replace(/\.md$/, ''),
-  }));
-}
+    if (!post || !post.published) return null
 
-// Get the blog post data
-async function getBlogPost(slug: string): Promise<BlogPost | null> {
-  try {
-    const blogsDirectory = path.join(process.cwd(), 'public/blogs');
-    const filePath = path.join(blogsDirectory, `${slug}.md`);
-    const fileContent = await fs.readFile(filePath, 'utf8');
-
-    // Parse the frontmatter and content
-    const { data, content } = matter(fileContent);
-
-    // Convert markdown to HTML with proper list handling
-    const processedContent = await remark()
-      .use(html, { sanitize: false })
-      .process(content);
-    const contentHtml = processedContent.toString();
+    const processedContent = await remark().use(html, { sanitize: false }).process(post.content)
 
     return {
-      slug,
-      title: data.title,
-      date: data.date,
-      author: data.author,
-      excerpt: data.excerpt,
-      featuredImage: data.featuredImage,
-      content: contentHtml,
-    };
-  } catch (error) {
-    console.error(`Error fetching blog post ${slug}:`, error);
-    return null;
-  }
-}
+      slug: post.slug,
+      title: post.title,
+      date: post.date.toISOString(),
+      author: post.author,
+      excerpt: post.excerpt,
+      featuredImage: post.featuredImage,
+      content: processedContent.toString(),
+    }
+  },
+  ['blog-post'],
+  { revalidate: 3600 },
+)
 
 // Format the date
 function formatDate(dateString: string) {
@@ -68,10 +58,7 @@ function formatDate(dateString: string) {
 
 // Blog post page component
 export default async function BlogPostPage({ params }: { params: Promise<{ slug: string }> }) {
-  // Resolve the params promise
-  const resolvedParams = await params;
-  const { slug } = resolvedParams;
-  
+  const { slug } = await params
   const post = await getBlogPost(slug);
 
   if (!post) {
@@ -92,10 +79,10 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
             <div className="w-full overflow-hidden rounded-lg mb-8">
               <Image
                 src={post.featuredImage}
-                alt="Description"
+                alt={post.title}
                 width={800}
                 height={450}
-                layout="responsive"
+                sizes="(max-width: 768px) 100vw, 800px"
                 className="w-full h-auto object-cover"
               />
             </div>
