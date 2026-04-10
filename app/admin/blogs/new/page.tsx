@@ -2,7 +2,9 @@ import Link from 'next/link'
 import { redirect } from 'next/navigation'
 import { revalidatePath } from 'next/cache'
 import { prisma } from '@/app/db'
-import { FeaturedImageField, ContentImagesField } from '../ImageFields'
+import { UTApi } from 'uploadthing/server'
+import type { UploadResultState } from '@/app/uploadthing/components'
+import { FeaturedImageField, ContentImagesUploader } from '../ImageFields'
 
 export const dynamic = 'force-dynamic'
 
@@ -21,7 +23,6 @@ async function createPost(formData: FormData) {
   const author = String(formData.get('author') ?? '').trim()
   const excerpt = String(formData.get('excerpt') ?? '').trim()
   const content = String(formData.get('content') ?? '').trim()
-  const featuredImageRaw = String(formData.get('featuredImage') ?? '').trim()
   const dateRaw = String(formData.get('date') ?? '').trim()
   const published = formData.get('published') === 'on'
   const providedSlug = String(formData.get('slug') ?? '').trim()
@@ -37,7 +38,20 @@ async function createPost(formData: FormData) {
   }
 
   const date = dateRaw ? new Date(dateRaw) : new Date()
-  const featuredImage = featuredImageRaw.length > 0 ? featuredImageRaw : null
+  let featuredImage: string | null = null
+
+  const featuredImageFile = formData.get('featuredImageFile')
+  if (featuredImageFile instanceof File && featuredImageFile.size > 0) {
+    const utapi = new UTApi()
+    const uploaded = await utapi.uploadFiles(featuredImageFile)
+    const result = Array.isArray(uploaded) ? uploaded[0] : uploaded
+    if ((result as any)?.error) {
+      const message = (result as any).error?.message ?? String((result as any).error)
+      throw new Error(message)
+    }
+    const url = (result as any)?.data?.url ?? (result as any)?.data?.ufsUrl ?? (result as any)?.data?.appUrl
+    if (url) featuredImage = url
+  }
 
   await prisma.blogPost.create({
     data: {
@@ -56,6 +70,27 @@ async function createPost(formData: FormData) {
   revalidatePath(`/blog/${slug}`)
   revalidatePath('/admin/blogs')
   redirect('/admin/blogs')
+}
+
+async function uploadContentImages(prevState: UploadResultState, formData: FormData): Promise<UploadResultState> {
+  'use server'
+
+  const utapi = new UTApi()
+  const files = formData.getAll('files').filter((f): f is File => f instanceof File && f.size > 0)
+
+  if (files.length === 0) return { urls: [], error: 'No files selected' }
+
+  const uploaded = await utapi.uploadFiles(files)
+  const results = Array.isArray(uploaded) ? uploaded : [uploaded]
+
+  const urls: string[] = []
+  for (const r of results) {
+    if ((r as any)?.error) continue
+    const url = (r as any)?.data?.url ?? (r as any)?.data?.ufsUrl ?? (r as any)?.data?.appUrl
+    if (url) urls.push(url)
+  }
+
+  return { urls, error: urls.length === 0 ? 'Upload failed' : null }
 }
 
 export default function NewBlogPostPage() {
@@ -153,7 +188,7 @@ export default function NewBlogPostPage() {
               <p className="opacity-70">
                 Upload images here, then copy a URL into your markdown like: ![](URL)
               </p>
-              <ContentImagesField />
+              <ContentImagesUploader action={uploadContentImages} />
             </div>
           </div>
         </div>
