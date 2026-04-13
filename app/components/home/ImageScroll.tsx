@@ -22,7 +22,7 @@ export default function ImageScroll() {
   ];
 
   return (
-    <div className=" min-h-screen overflow-hidden bg-base-100 content-center">
+    <div className="min-h-[calc(100vh-128px)] overflow-hidden content-center bg-base-200">
       <h2 className="text-3xl font-bold text-center mb-8">Moments in Images</h2>
       <div className="flex animate-scroll space-x-4 mb-8">
         {[...images1, ...images1].map((imageUrl1, index) => (
@@ -33,6 +33,8 @@ export default function ImageScroll() {
               className="w-full h-full object-cover rounded-lg"
               width={800}
               height={600}
+              priority
+              quality={75}
             />
           </div>
         ))}
@@ -46,6 +48,8 @@ export default function ImageScroll() {
               className="w-full h-full object-cover rounded-lg"
               width={800}
               height={600}
+              priority
+              quality={75}
             />
           </div>
         ))}

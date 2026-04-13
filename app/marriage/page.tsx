@@ -154,7 +154,7 @@ export default function Marriage() {
         <section className="mb-16">
           <h2 className="text-3xl font-bold text-center mb-8">Wedding Entourage</h2>
           
-          <div className="relative w-full h-[500px] mb-8 rounded-xl overflow-hidden shadow-xl bg-white">
+          <div className="relative w-full h-[500px] mb-8 rounded-xl overflow-hidden shadow-xl bg-base-100">
             <Image 
               src="https://gv0zzhe6ot.ufs.sh/f/qNNctTpmyN4MR2HxXpONjIzrhcLZFMG7lqYpdQCf9vaRBPD0" 
               alt="Wedding Entourage" 
