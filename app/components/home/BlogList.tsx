@@ -11,7 +11,7 @@ type BlogPost = {
   date: string;
   author: string;
   excerpt: string;
-  featuredImage: string;
+  featuredImage: string | null;
 };
 
 export default function BlogList() {
@@ -100,7 +100,7 @@ export default function BlogList() {
                 >
                   <figure className="h-48 overflow-hidden">
                     <Image 
-                      src={post.featuredImage || '/images/default-blog.jpg'} 
+                      src={post.featuredImage || '/img/home/hero.jpg'} 
                       alt={post.title}
                       width={400}
                       height={300}
