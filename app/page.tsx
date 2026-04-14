@@ -1,7 +1,6 @@
 import Hero from './components/home/Hero';
 import ImageScroll from './components/home/ImageScroll';
 import BlogList from './components/home/BlogList';
-import Footer from './components/Footer';
 
 export default function Home() {
   return (
