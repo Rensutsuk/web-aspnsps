@@ -99,6 +99,11 @@ body {
   font-family: var(--font-gentium), serif;
 }
 
+.history-slide {
+  transition: opacity 1s ease-in-out !important;
+  will-change: opacity; 
+}
+
 @keyframes scroll {
   0% { transform: translateX(0); }
   100% { transform: translateX(-50%); }
