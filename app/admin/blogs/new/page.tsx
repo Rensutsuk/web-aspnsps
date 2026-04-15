@@ -5,6 +5,7 @@ import { prisma } from '@/app/db'
 import { UTApi } from 'uploadthing/server'
 import type { UploadResultState } from '@/app/uploadthing/components'
 import { FeaturedImageField, ContentImagesUploader } from '../ImageFields'
+import { requireBlogManager } from '@/auth'
 
 export const dynamic = 'force-dynamic'
 
@@ -18,6 +19,8 @@ function toSlug(input: string) {
 
 async function createPost(formData: FormData) {
   'use server'
+
+  await requireBlogManager()
 
   const title = String(formData.get('title') ?? '').trim()
   const author = String(formData.get('author') ?? '').trim()
@@ -75,6 +78,8 @@ async function createPost(formData: FormData) {
 async function uploadContentImages(prevState: UploadResultState, formData: FormData): Promise<UploadResultState> {
   'use server'
 
+  await requireBlogManager()
+
   const utapi = new UTApi()
   const files = formData.getAll('files').filter((f): f is File => f instanceof File && f.size > 0)
 
@@ -93,7 +98,8 @@ async function uploadContentImages(prevState: UploadResultState, formData: FormD
   return { urls, error: urls.length === 0 ? 'Upload failed' : null }
 }
 
-export default function NewBlogPostPage() {
+export default async function NewBlogPostPage() {
+  await requireBlogManager()
   const today = new Date().toISOString().slice(0, 10)
 
   return (

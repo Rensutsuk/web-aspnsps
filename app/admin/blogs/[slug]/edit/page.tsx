@@ -5,11 +5,14 @@ import { prisma } from '@/app/db'
 import { UTApi } from 'uploadthing/server'
 import type { UploadResultState } from '@/app/uploadthing/components'
 import { FeaturedImageField, ContentImagesUploader } from '../../ImageFields'
+import { requireBlogManager } from '@/auth'
 
 export const dynamic = 'force-dynamic'
 
 async function updatePost(slug: string, formData: FormData) {
   'use server'
+
+  await requireBlogManager()
 
   const title = String(formData.get('title') ?? '').trim()
   const author = String(formData.get('author') ?? '').trim()
@@ -61,6 +64,8 @@ async function updatePost(slug: string, formData: FormData) {
 async function uploadContentImages(prevState: UploadResultState, formData: FormData): Promise<UploadResultState> {
   'use server'
 
+  await requireBlogManager()
+
   const utapi = new UTApi()
   const files = formData.getAll('files').filter((f): f is File => f instanceof File && f.size > 0)
 
@@ -80,6 +85,7 @@ async function uploadContentImages(prevState: UploadResultState, formData: FormD
 }
 
 export default async function EditBlogPostPage({ params }: { params: Promise<{ slug: string }> }) {
+  await requireBlogManager()
   const { slug } = await params
   const post = await prisma.blogPost.findUnique({
     where: { slug },
