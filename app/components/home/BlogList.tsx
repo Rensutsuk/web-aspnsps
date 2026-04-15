@@ -44,6 +44,13 @@ export default function BlogList() {
 
   const paginate = (pageNumber: number) => {
     setCurrentPage(pageNumber);
+
+    const scrollRoot = document.querySelector('[data-home-scroll]');
+    if (scrollRoot instanceof HTMLElement) {
+      scrollRoot.scrollTo({ top: 0, behavior: 'smooth' });
+      return;
+    }
+
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
@@ -75,7 +82,7 @@ export default function BlogList() {
   };
 
   return (
-    <div className="py-16 bg-white">
+    <div className="relative min-h-[calc(100vh-128px)] pt-16 bg-base-100">
       <div className="container mx-auto px-4">
         <h2 className="text-3xl font-bold text-center mb-8">Parish Blog</h2>
         {loading ? (

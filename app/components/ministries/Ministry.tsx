@@ -36,14 +36,14 @@ export default function MinistriesPage() {
       title: "Greeters and Collectors Ministry",
       description: "Greeters welcome parishioners and visitors with warmth and kindness, offering assistance when needed. Collectors, on the other hand, ensure the reverent and organized collection of offerings during Mass, helping manage the flow of congregants and contributing to the dignity of the liturgical celebration.",
       fullDescription: "Greeters welcome parishioners and visitors with warmth and kindness, offering assistance when needed. Collectors, on the other hand, ensure the reverent and organized collection of offerings during Mass, helping manage the flow of congregants and contributing to the dignity of the liturgical celebration.",
-      image: "https://picsum.photos/800/600?random=5",
-      activities: ["Hospitality Training", "Church Protocol Sessions", "Team Building", "Service Scheduling"]
+      image: "/img/ministry/gcm.jpg",
+      activities: ["Hospitality Training", "Church Protocol Sessions"]
     },
     {
       title: "Mother Butler Guild",
       description: "The Mother Butler Guild takes charge of preparing and maintaining the altar linens, vestments, sacred vessels, and decorations. Often working quietly behind the scenes, they ensure the sanctuary remains clean, orderly, and worthy of the liturgy. Their service reflects the dignity of the Church and honors the sacred spaces where Christ is present.",
       fullDescription: "The Mother Butler Guild takes charge of preparing and maintaining the altar linens, vestments, sacred vessels, and decorations. Often working quietly behind the scenes, they ensure the sanctuary remains clean, orderly, and worthy of the liturgy. Their service reflects the dignity of the Church and honors the sacred spaces where Christ is present.",
-      image: "https://picsum.photos/800/600?random=6",
+      image: "/img/ministry/mbg.jpg",
       activities: ["Altar Preparation", "Vestment Care", "Flower Arrangement", "Church Decoration"]
     },
     {
@@ -57,7 +57,7 @@ export default function MinistriesPage() {
       title: "Social Communications Ministry",
       description: "The Social Communications Ministry serves as the voice of the parish in the digital age. It manages communication platforms—such as parish websites, social media, newsletters, and visual displays—to share announcements, document parish events, and disseminate Church teachings, through photography, videography, writing, and online engagement.",
       fullDescription: "The Social Communications Ministry serves as the voice of the parish in the digital age. It manages communication platforms—such as parish websites, social media, newsletters, and visual displays—to share announcements, document parish events, and disseminate Church teachings, through photography, videography, writing, and online engagement.",
-      image: "https://picsum.photos/800/600?random=7",
+      image: "/img/ministry/socom.jpg",
       activities: ["Social Media Management", "Website Maintenance", "Parish Bulletin Production", "Event Documentation"]
     },
     {

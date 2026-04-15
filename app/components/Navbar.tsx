@@ -2,8 +2,14 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { FaMoon, FaSun } from 'react-icons/fa';
 
-export default function Navbar() {
+type NavbarProps = {
+  theme: 'mytheme' | 'mytheme-dark';
+  onToggleTheme: () => void;
+};
+
+export default function Navbar({ theme, onToggleTheme }: NavbarProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   useEffect(() => {
@@ -37,14 +43,23 @@ export default function Navbar() {
             <li><Link href="/services">Services</Link></li>
             <li><Link href="/marriage">Marriage</Link></li>
             <li><Link href="/ministries">Ministries</Link></li>
-            <li><Link href="/donate">Donate</Link></li>
             <li><Link href="/contact">Contact</Link></li>
           </ul>
         </div>
 
         <div className="navbar-end">
           <button
+            type="button"
+            className="btn btn-ghost btn-circle"
+            aria-label="Toggle theme"
+            onClick={onToggleTheme}
+          >
+            {theme === 'mytheme-dark' ? <FaSun className="h-5 w-5" /> : <FaMoon className="h-5 w-5" />}
+          </button>
+
+          <button
             className="btn btn-ghost lg:hidden"
+            aria-label="Menu"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
           >
             <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -58,7 +73,7 @@ export default function Navbar() {
       <div className={`fixed inset-0 bg-primary z-40 lg:hidden transition-transform duration-300 ease-in-out ${isMenuOpen ? 'translate-x-0' : 'translate-x-full'
         }`}>
         <div className="flex flex-col h-full pt-20 p-4">
-          <ul className="menu w-full gap-4">
+          <ul className="menu w-full gap-2">
             <li>
               <Link
                 href="/"
@@ -111,15 +126,6 @@ export default function Navbar() {
                 className="text-2xl py-4 text-center text-primary-content hover:bg-primary-focus"
               >
                 Ministries
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="/donate"
-                onClick={() => setIsMenuOpen(false)}
-                className="text-2xl py-4 text-center text-primary-content hover:bg-primary-focus"
-              >
-                Donate
               </Link>
             </li>
             <li>

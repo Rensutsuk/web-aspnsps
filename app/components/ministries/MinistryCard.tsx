@@ -42,6 +42,8 @@ export default function MinistryCard({ ministries }: { ministries: any[] }) {
               className="w-full h-full object-cover transform hover:scale-110 transition-transform duration-500"
               width={800}
               height={600}
+              priority={true}
+              quality={75}
             />
             <div className="absolute inset-0 bg-gradient-to-t from-base-100 to-transparent opacity-60"></div>
           </div>
@@ -76,7 +78,8 @@ export default function MinistryCard({ ministries }: { ministries: any[] }) {
                   alt={selectedMinistry.title}
                   className="w-full h-full object-cover rounded-lg"
                   layout="fill"
-                  objectFit="cover"
+                  priority={true}
+                  quality={90}
                 />
               </div>
               <p className="py-4 text-base-content/80 text-justify">{selectedMinistry.fullDescription}</p>
