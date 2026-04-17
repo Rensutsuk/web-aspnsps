@@ -39,7 +39,6 @@ export default async function AdminLoginPage({
   }
 
   const params = await searchParams;
-  const bootstrap = await getBootstrapStatus();
   const showCredentialsError = params.error === "credentials";
 
   return (
