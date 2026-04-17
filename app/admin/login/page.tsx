@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { AuthError } from "next-auth";
 import { redirect } from "next/navigation";
-import { auth, getBootstrapStatus, signIn } from "@/auth";
+import { auth, signIn } from "@/auth";
 
 export const dynamic = "force-dynamic";
 
