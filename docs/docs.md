@@ -407,6 +407,78 @@ INITIAL_ADMIN_PASSWORD=
 
 ---
 
+## Project Bootstrap (Current Architecture)
+
+This repository is the new implementation of the ASPNSPS website using the framework and structure defined in this document.
+
+### Local Setup
+
+1. Install dependencies:
+
+```bash
+npm install
+```
+
+2. Create local environment file:
+
+```bash
+copy .env.example .env
+```
+
+3. Configure at minimum:
+- `DATABASE_URL` (PostgreSQL connection string)
+- `AUTH_SECRET`
+- `NEXTAUTH_URL` (e.g. `http://localhost:3000`)
+- `WEB3FORMS_ACCESS_KEY`
+- `INITIAL_ADMIN_EMAIL`
+- `INITIAL_ADMIN_PASSWORD`
+
+4. Prisma workflow (after DB is available):
+
+```bash
+npx prisma migrate dev
+```
+
+5. Run development server:
+
+```bash
+npm run dev
+```
+
+### Architecture Notes
+- The app uses Next.js App Router with `src/` directory and route groups under `src/app/`.
+- Public routes live under `src/app/(public)` and share a public layout that includes the navbar and footer.
+- Chakra UI is the UI system; light/dark mode is implemented via Chakra color mode with SSR cookie support to reduce hydration issues.
+- Smooth scrolling and section snapping are implemented in the public layout using Lenis (`lenis`) plus native CSS `scroll-snap` on the scroll container.
+- The home page uses Framer Motion to animate section transitions during scrolling (subtle blur + fade + vertical easing) for a more guided, “slide-like” experience.
+- Prisma defines the database schema in `prisma/schema.prisma` and the shared Prisma client lives in `src/lib/prisma.ts`.
+- Legacy assets have been copied into this project for reuse:
+  - `public/logo.png`
+  - `public/img/**` (including `public/img/home/hero.jpg`)
+
+---
+
+## Legacy Project Reference (web-aspnsps)
+
+The legacy project at `D:\Projects\web-aspnsps` is used as a visual and interaction reference only. The new project MUST follow the architecture and stack defined in this document.
+
+### What We Reuse
+- Homepage concept: scroll-driven full-viewport sections (scroll snapping where appropriate).
+- Information architecture: global navbar and footer composition patterns.
+
+### What We Replace
+- Legacy theme system (`data-theme` + DaisyUI class-based themes) is replaced by Chakra UI theme tokens and Chakra color mode.
+- Legacy layout composition (`RootLayoutClient`) is replaced by route-group layouts and shared providers.
+
+### Practical Mapping
+| Legacy Concept | Legacy Location | New Equivalent |
+|--------------|------------------|----------------|
+| Global layout composition | `app/RootLayoutClient.tsx` | `src/app/(public)/layout.tsx` + `src/providers/AppProviders.tsx` |
+| Theme toggle | `localStorage + data-theme` | Chakra `useColorMode` + SSR cookies |
+| Navbar | `app/components/Navbar.tsx` | `src/components/layout/Navbar.tsx` |
+| Footer | `app/components/Footer.tsx` | `src/components/layout/Footer.tsx` |
+| Home scroll sections | `app/page.tsx` | `src/app/(public)/page.tsx` |
+
 ## Public Website Requirements
 
 ### Global Layout
@@ -418,6 +490,21 @@ Every public page MUST include:
 - Theme toggle
 - Responsive navigation
 
+### Shared Page Header
+
+All standard public subpages SHOULD use a shared page header component to keep visual hierarchy consistent.
+
+Requirements:
+
+- Consistent title and description spacing
+- Optional eyebrow/badge text
+- Optional background image treatment
+- Optional primary actions
+- Optional metadata cards for contact or quick facts
+
+Exception:
+- Highly custom immersive pages such as full-screen story sliders may use a specialized header layout when necessary
+
 ---
 
 ## Navbar
@@ -425,15 +512,19 @@ Every public page MUST include:
 ### Desktop Navigation
 
 - Home
-- Ministries
+- About
+- Mass Schedule
 - Services
-- Blog
+- Marriage
+- Ministries
 - Contact
 
 ### Mobile Navigation
 
 - Hamburger menu
-- Sticky header
+- Fixed header
+- Full-screen slide-in menu
+- Active tab highlight is based on the current route
 
 ---
 
@@ -442,9 +533,8 @@ Every public page MUST include:
 Include:
 
 - Parish name
-- Address
-- Contact information
-- Quick links
+- Contact information (phone + email)
+- Donate link
 - Social media links
 
 ---
@@ -462,13 +552,11 @@ Requirements:
 - Background image support
 - Optional parallax effects
 
-### Hero Slides
+### Home Sections
 
-1. Welcome
-2. Mass Schedules
-3. Parish Events
-4. Ministries
-5. Latest Announcements
+1. Hero (background image + parish tagline)
+2. Latest Announcements (home blog listing)
+3. Moments in Images (continuous scrolling image strips)
 
 ---
 
@@ -485,15 +573,22 @@ Requirements:
 - Tab-based navigation
 - Search capability
 - Responsive card layout
+- Accessible detail drawer or modal for expanded ministry information
+- Visible join CTA near the directory content
 
 ### Data Model
 
 ```ts
 type Ministry = {
+  slug: string;
+  category: "ministries" | "organizations" | "apostolates";
   title: string;
+  summary: string;
   description: string;
-  image?: string;
+  image: string;
   contactPerson?: string;
+  activities: string[];
+  tags: string[];
 };
 ```
 
@@ -551,6 +646,17 @@ Requirements:
 - Client-side validation
 - Success state
 - Error state
+- Subject shortcuts for common parish inquiries
+- Route through a server-side `app/api/contact/route.ts` handler
+- Store the Web3Forms access key in `WEB3FORMS_ACCESS_KEY`
+- Never expose the Web3Forms access key in client-side code
+- Show inline submission feedback without forcing a page reload
+
+Implementation notes:
+
+- Reuse the shared `PageHeader` component for visual consistency with other public pages
+- Keep parish contact details, office hours, and map URLs in `src/lib/siteConfig.ts`
+- Ensure the Google Maps iframe includes a descriptive `title` attribute for accessibility
 
 ---
 
