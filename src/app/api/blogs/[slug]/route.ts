@@ -1,6 +1,6 @@
 import { getBlogPostBySlug } from "@/features/blog/data";
 
-export async function GET(_request: Request, context: RouteContext<"/api/blogs/[slug]">) {
+export async function GET(_request: Request, context: { params: Promise<{ slug: string }> | { slug: string } }) {
   const { slug } = await context.params;
   const post = await getBlogPostBySlug(slug);
 

@@ -65,7 +65,7 @@ export function Navbar() {
     >
       <Container maxW="6xl" h="64px">
         <Flex align="center" justify="space-between" h="64px">
-          <Flex align="center" gap={3}>
+          <Flex align="center" gap={3} position="relative" right="3rem">
             <Box pl={2} py={1}>
               <Image src="/logo.png" alt="ASPNSPS Logo" width={35} height={35} />
             </Box>
@@ -74,7 +74,7 @@ export function Navbar() {
             </Link>
           </Flex>
 
-          <HStack spacing={4} as="nav" aria-label="Primary" display={{ base: "none", lg: "flex" }}>
+          <HStack spacing={4} as="nav" aria-label="Primary" display={{ base: "none", lg: "flex" }} pl="15px">
             {siteConfig.nav.map((item) => (
               <Link
                 key={item.href}

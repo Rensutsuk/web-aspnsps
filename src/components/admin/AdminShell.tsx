@@ -32,6 +32,9 @@ export function AdminShell({ title, description, children, actions }: AdminShell
               <Button as="a" href="/admin/blogs" variant="ghost">
                 Blog
               </Button>
+              <Button as="a" href="/admin/events" variant="ghost">
+                Events
+              </Button>
               {actions}
               <AdminSignOutButton />
             </HStack>

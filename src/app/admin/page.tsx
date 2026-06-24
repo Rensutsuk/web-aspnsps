@@ -9,10 +9,13 @@ export const dynamic = "force-dynamic";
 export default async function AdminDashboardPage() {
   const admin = await requireAdmin();
 
-  const [totalPosts, publishedPosts, draftPosts, totalAdmins] = await Promise.all([
+  const [totalPosts, publishedPosts, draftPosts, totalEvents, publishedEvents, draftEvents, totalAdmins] = await Promise.all([
     prisma.blogPost.count(),
     prisma.blogPost.count({ where: { published: true } }),
     prisma.blogPost.count({ where: { published: false } }),
+    prisma.event.count(),
+    prisma.event.count({ where: { published: true } }),
+    prisma.event.count({ where: { published: false } }),
     prisma.adminUser.count({ where: { isActive: true } }),
   ]);
 
@@ -32,6 +35,9 @@ export default async function AdminDashboardPage() {
         <StatCard label="Total Posts" value={String(totalPosts)} help="All draft and published articles" />
         <StatCard label="Published" value={String(publishedPosts)} help="Visible on the public website" />
         <StatCard label="Drafts" value={String(draftPosts)} help="Saved but not publicly visible" />
+        <StatCard label="Total Events" value={String(totalEvents)} help="All scheduled events" />
+        <StatCard label="Published Events" value={String(publishedEvents)} help="Visible on /events and iCal feed" />
+        <StatCard label="Draft Events" value={String(draftEvents)} help="Hidden from the public website" />
         <StatCard label="Active Accounts" value={String(totalAdmins)} help="Administrators and editors" />
       </SimpleGrid>
 
@@ -41,6 +47,12 @@ export default async function AdminDashboardPage() {
           description="Create announcements, update reflections, publish drafts, and review the public article archive."
           href="/admin/blogs"
           actionLabel="Open Blog Manager"
+        />
+        <ActionCard
+          title="Manage Events"
+          description="Create and publish event pages, link optional blog posts, and export iCal feeds for the public calendar."
+          href="/admin/events"
+          actionLabel="Open Events Manager"
         />
         <ActionCard
           title={admin.role === "SYSADMIN" ? "Manage Admin And Editor Accounts" : "Role Permissions"}

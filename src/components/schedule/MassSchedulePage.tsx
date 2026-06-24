@@ -184,9 +184,8 @@ export function MassSchedulePage() {
   }, [tabIndex, todayConfession, todayMass, todayName]);
 
   return (
-    <Box py={{ base: 10, md: 12 }}>
+    <Box pb={{ base: 10, md: 12 }}>
       <PageHeader
-        eyebrow="Parish Services"
         title="Schedule of Services"
         description={
           <>
@@ -198,6 +197,8 @@ export function MassSchedulePage() {
             .
           </>
         }
+        backgroundImageSrc="/img/about/church-building.jpg"
+        backgroundImageAlt="Schedule"
       />
 
       <Container maxW="6xl" mt={{ base: 8, md: 10 }}>

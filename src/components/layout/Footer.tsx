@@ -21,7 +21,7 @@ export function Footer() {
   return (
     <Box
       as="footer"
-      bg="gray.50"
+      bg="brand.100"
       color="gray.700"
       borderTopWidth="1px"
       borderColor="gray.200"

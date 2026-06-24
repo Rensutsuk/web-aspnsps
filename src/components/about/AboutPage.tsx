@@ -92,43 +92,7 @@ export function AboutPage() {
         title="About Our Parish"
         description={siteConfig.parishNameFull}
         backgroundImageSrc="/img/about/church-building.jpg"
-        backgroundImageAlt="Church Building"
-        actions={
-          <>
-            <Button as={NextLink} href="/about/history" colorScheme="brand" variant="solid">
-              Parish History
-            </Button>
-            <Button as={NextLink} href="/schedule" colorScheme="brand" variant="outline" color="white" borderColor="whiteAlpha.700" _hover={{ bg: "whiteAlpha.200" }}>
-              Mass Schedule
-            </Button>
-          </>
-        }
-        meta={[
-          {
-            label: "Phone",
-            value: (
-              <Link as={NextLink} href={`tel:${siteConfig.contact.phone}`} fontWeight="semibold" color="white">
-                {siteConfig.contact.phone}
-              </Link>
-            ),
-          },
-          {
-            label: "Email",
-            value: (
-              <Link as={NextLink} href={`mailto:${siteConfig.contact.email}`} fontWeight="semibold" color="white">
-                {siteConfig.contact.email}
-              </Link>
-            ),
-          },
-          {
-            label: "Facebook",
-            value: (
-              <Link href={siteConfig.links.facebook} isExternal fontWeight="semibold" color="white">
-                aspnspsofficial
-              </Link>
-            ),
-          },
-        ]}
+        backgroundImageAlt="Church Building" 
       />
 
       <Container maxW="6xl" mt={{ base: 8, md: 10 }}>

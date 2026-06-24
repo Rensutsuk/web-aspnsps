@@ -79,30 +79,21 @@ export function PageHeader({
               {meta.map((item) => (
                 <Box
                   key={item.label}
-                  bg={hasBackground ? "whiteAlpha.900" : "white"}
+                  bg="blackAlpha.500"
                   borderWidth="1px"
-                  borderColor={hasBackground ? "whiteAlpha.600" : "gray.200"}
+                  borderColor="whiteAlpha.300"
                   borderRadius="2xl"
                   px={{ base: 4, md: 5 }}
                   py={{ base: 4, md: 5 }}
-                  _dark={{
-                    bg: hasBackground ? "blackAlpha.500" : "gray.800",
-                    borderColor: hasBackground ? "whiteAlpha.300" : "gray.700",
-                  }}
-                  backdropFilter={hasBackground ? "blur(10px)" : undefined}
+                  backdropFilter="blur(10px)"
                 >
                   <Text
                     fontSize="sm"
-                    color={hasBackground ? "whiteAlpha.800" : "gray.500"}
-                    _dark={{ color: hasBackground ? "whiteAlpha.800" : "gray.300" }}
+                    color="whiteAlpha.800"
                   >
                     {item.label}
                   </Text>
-                  <Box
-                    mt={1}
-                    color={hasBackground ? "white" : undefined}
-                    _dark={hasBackground ? undefined : { color: "gray.100" }}
-                  >
+                  <Box mt={1} color="white">
                     {item.value}
                   </Box>
                 </Box>
