@@ -42,7 +42,13 @@ export default function NotFound() {
   return (
     <>
       <Navbar />
-      <Box pt="64px" minH="100dvh" bg="gray.50" _dark={{ bg: "gray.900" }}>
+      <Box
+        pt={{ base: "56px", md: "64px" }}
+        minH="100dvh"
+        bg="gray.50"
+        _dark={{ bg: "gray.900" }}
+        style={{ scrollPaddingTop: "calc(56px + env(safe-area-inset-top, 0px))" }}
+      >
         <PageHeader
           eyebrow="404"
           title="This page could not be found"

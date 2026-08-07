@@ -2,12 +2,20 @@
   "name": "web-nsps",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": ">=25"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "check": "npm run lint && tsc -p tsconfig.json --noEmit"
+    "check": "npm run lint && tsc -p tsconfig.json --noEmit",
+    "test:ui": "playwright test",
+    "test:ui:headed": "playwright test --headed",
+    "test:ui:report": "node scripts/summarize-ui-report.mjs",
+    "test:ui:report:open": "playwright show-report",
+    "test:ui:audit": "playwright test tests/ui/accessibility.spec.ts"
   },
   "dependencies": {
     "@chakra-ui/react": "^2.10.7",
@@ -32,7 +40,9 @@
     "uploadthing": "^7.7.4"
   },
   "devDependencies": {
-    "@types/node": "^20",
+    "@axe-core/playwright": "^4.12.1",
+    "@playwright/test": "^1.61.1",
+    "@types/node": "^25",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",

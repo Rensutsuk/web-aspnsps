@@ -1,6 +1,6 @@
 import { cache } from "react";
 
-import { prisma } from "@/lib/prisma";
+import { prisma, withConnectionGuard } from "@/lib/prisma";
 import type { BlogFilterState, BlogIndexData, BlogPostDetail, BlogPostSummary } from "@/features/blog/types";
 import { calculateReadingTime, createExcerpt } from "@/features/blog/utils";
 
@@ -32,13 +32,15 @@ function mapPost(record: PublishedPostRecord): BlogPostSummary {
   };
 }
 
-async function safeQuery<T>(operation: () => Promise<T>, fallback: T) {
-  try {
-    return await operation();
-  } catch (error) {
-    console.error("Blog query failed", error);
-    return fallback;
-  }
+async function safeQuery<T>(operation: () => Promise<T>, fallback: T, label = "Blog") {
+  return withConnectionGuard(
+    operation,
+    () => fallback,
+    (error) => {
+      console.error(`${label} query failed`, error);
+      return fallback;
+    },
+  )();
 }
 
 const getPublishedPostRecords = cache(async () => {
@@ -64,6 +66,7 @@ const getPublishedPostRecords = cache(async () => {
         },
       }) as Promise<PublishedPostRecord[]>,
     [] as PublishedPostRecord[],
+    "Blog listing",
   );
 
   return records.map(mapPost);
@@ -116,6 +119,7 @@ export async function getBlogPostBySlug(slug: string): Promise<BlogPostDetail | 
         },
       }) as Promise<PublishedPostRecord | null>,
     null,
+    `Blog detail [${slug}]`,
   );
 
   if (!record || !record.published) {

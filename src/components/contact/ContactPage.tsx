@@ -331,7 +331,7 @@ export function ContactPage() {
                   <Wrap spacing={2}>
                     {contactTopics.map((topic) => (
                       <WrapItem key={topic}>
-                        <Button size="sm" variant="outline" onClick={() => handleChange("subject", topic)}>
+                        <Button type="button" size="sm" variant="outline" onClick={() => handleChange("subject", topic)}>
                           {topic}
                         </Button>
                       </WrapItem>

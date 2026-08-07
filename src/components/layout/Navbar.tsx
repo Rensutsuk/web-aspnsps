@@ -64,39 +64,40 @@ export function Navbar() {
       color="white"
     >
       <Container maxW="6xl" h="64px">
-        <Flex align="center" justify="space-between" h="64px">
-          <Flex align="center" gap={3} position="relative" right="3rem">
+        <Flex align="center" justifyContent="space-between" h="64px">
+          <Flex align="center" gap={3} position="relative">
             <Box pl={2} py={1}>
-              <Image src="/logo.png" alt="ASPNSPS Logo" width={35} height={35} />
+              <Image
+                src="/logo.png"
+                alt="ASPNSPS Logo"
+                width={35}
+                height={35}
+              />
             </Box>
             <Link as={NextLink} href="/" fontWeight="bold" fontSize="xl">
               {siteConfig.parishNameShort}
             </Link>
           </Flex>
 
-          <HStack spacing={4} as="nav" aria-label="Primary" display={{ base: "none", lg: "flex" }} pl="15px">
+          <HStack
+            spacing={1}
+            as="nav"
+            aria-label="Primary"
+            display={{ base: "none", lg: "flex" }}
+            pl="15px"
+          >
             {siteConfig.nav.map((item) => (
               <Link
                 key={item.href}
                 as={NextLink}
                 href={item.href}
+                p={2}
                 fontWeight={isActive(item.href) ? "bold" : "medium"}
+                bg={isActive(item.href) ? "brand.700" : "transparent"}
+                _hover={{ bg: "brand.700" }}
+                borderRadius="md"
                 opacity={isActive(item.href) ? 1 : 0.9}
                 position="relative"
-                _after={
-                  isActive(item.href)
-                    ? {
-                        content: '""',
-                        position: "absolute",
-                        left: 0,
-                        right: 0,
-                        bottom: "-10px",
-                        height: "2px",
-                        bg: "white",
-                        borderRadius: "full",
-                      }
-                    : undefined
-                }
               >
                 {item.label}
               </Link>

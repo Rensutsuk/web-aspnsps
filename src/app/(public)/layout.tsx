@@ -1,6 +1,7 @@
+import { Box } from "@chakra-ui/react";
+
 import { Footer } from "@/components/layout/Footer";
 import { Navbar } from "@/components/layout/Navbar";
-import { SmoothScrollContainer } from "@/components/common/SmoothScrollContainer";
 
 type PublicLayoutProps = {
   children: React.ReactNode;
@@ -10,20 +11,15 @@ export default function PublicLayout({ children }: PublicLayoutProps) {
   return (
     <>
       <Navbar />
-      <SmoothScrollContainer
-        mode="paged"
-        showPager
-        style={{
-          height: "100dvh",
-          overflowY: "auto",
-          scrollPaddingTop: "64px",
-          paddingTop: "64px",
-          scrollSnapType: "y mandatory",
-        }}
+      <Box
+        as="main"
+        minH="100dvh"
+        pt={{ base: "56px", md: "64px" }}
+        style={{ scrollPaddingTop: "calc(56px + env(safe-area-inset-top, 0px))" }}
       >
         {children}
         <Footer />
-      </SmoothScrollContainer>
+      </Box>
     </>
   );
 }

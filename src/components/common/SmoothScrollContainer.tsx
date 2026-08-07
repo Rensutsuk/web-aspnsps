@@ -9,14 +9,90 @@ type SmoothScrollContainerProps = {
   children: React.ReactNode;
   className?: string;
   style?: React.CSSProperties;
+  mdStyle?: React.CSSProperties;
   mode?: "buffered" | "paged";
   showPager?: boolean;
 };
+
+type ScrollConfig = {
+  duration: number;
+  wheelCooldown: number;
+  wheelThreshold: number;
+  snapEndBuffer: number;
+  touchMultiplier: number;
+  smoothWheel: boolean;
+};
+
+const DESKTOP_PAGED: ScrollConfig = {
+  duration: 0.76,
+  wheelCooldown: 120,
+  wheelThreshold: 6,
+  snapEndBuffer: 80,
+  touchMultiplier: 1.35,
+  smoothWheel: true,
+};
+
+const MOBILE_PAGED: ScrollConfig = {
+  duration: 0.62,
+  wheelCooldown: 80,
+  wheelThreshold: 8,
+  snapEndBuffer: 140,
+  touchMultiplier: 1.9,
+  smoothWheel: true,
+};
+
+const DESKTOP_BUFFERED: ScrollConfig = {
+  duration: 0.62,
+  wheelCooldown: 60,
+  wheelThreshold: 4,
+  snapEndBuffer: 180,
+  touchMultiplier: 1.55,
+  smoothWheel: true,
+};
+
+const MOBILE_BUFFERED: ScrollConfig = {
+  duration: 0.52,
+  wheelCooldown: 50,
+  wheelThreshold: 6,
+  snapEndBuffer: 220,
+  touchMultiplier: 2.0,
+  smoothWheel: true,
+};
+
+const REDUCED_MOTION: ScrollConfig = {
+  duration: 0.18,
+  wheelCooldown: 40,
+  wheelThreshold: 2,
+  snapEndBuffer: 260,
+  touchMultiplier: 2.2,
+  smoothWheel: false,
+};
+
+function easeOutCubic(t: number) {
+  return 1 - Math.pow(1 - t, 3);
+}
+
+function easeInOutCubic(t: number) {
+  return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+}
+
+function isTouchPrimary() {
+  if (typeof window === "undefined") return false;
+  if (window.matchMedia("(pointer: coarse)").matches) return true;
+  if (navigator.maxTouchPoints && navigator.maxTouchPoints > 1) return true;
+  return false;
+}
+
+function prefersReducedMotion() {
+  if (typeof window === "undefined") return false;
+  return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+}
 
 export function SmoothScrollContainer({
   children,
   className,
   style,
+  mdStyle,
   mode = "buffered",
   showPager = false,
 }: SmoothScrollContainerProps) {
@@ -26,18 +102,36 @@ export function SmoothScrollContainer({
   const [snapTotal, setSnapTotal] = useState(0);
   const activeIndexRef = useRef(0);
   const scrollToIndexRef = useRef<(index: number) => void>(() => undefined);
+  const rafPendingRef = useRef(0);
 
   useEffect(() => {
     const wrapper = wrapperRef.current;
     const content = contentRef.current;
     if (!wrapper || !content) return;
 
+    const isTouch = isTouchPrimary();
+    const reduceMotion = prefersReducedMotion();
+    const paged = mode === "paged";
+    const effectiveMode = reduceMotion ? "buffered" : mode;
+
+    let cfg: ScrollConfig;
+    if (reduceMotion) {
+      cfg = REDUCED_MOTION;
+    } else if (paged) {
+      cfg = isTouch ? MOBILE_PAGED : DESKTOP_PAGED;
+    } else {
+      cfg = isTouch ? MOBILE_BUFFERED : DESKTOP_BUFFERED;
+    }
+
     const lenis = new Lenis({
       wrapper,
       content,
-      duration: 1.05,
-      smoothWheel: true,
-      touchMultiplier: 1.5,
+      duration: cfg.duration,
+      smoothWheel: cfg.smoothWheel && effectiveMode !== "buffered",
+      syncTouch: false,
+      touchMultiplier: cfg.touchMultiplier,
+      easing: easeInOutCubic,
+      autoResize: true,
     });
 
     const snapSelector = "[data-snap-section]";
@@ -51,24 +145,41 @@ export function SmoothScrollContainer({
     let updateIndexTimer = 0;
     let wheelWindowTimer = 0;
 
-    const computeSnapTargets = () => {
+    const getScrollPaddingTop = () => {
+      const styleTop = wrapper.style.paddingTop;
+      if (styleTop && styleTop.endsWith("px")) {
+        return Number.parseFloat(styleTop) || 0;
+      }
+      return 64;
+    };
+
+    const computeSnapTargetsNow = () => {
       const sections = Array.from(content.querySelectorAll<HTMLElement>(snapSelector));
+      const paddingTop = getScrollPaddingTop();
       snapTargets = sections
-        .map((el) => el.offsetTop)
+        .map((el) => el.offsetTop - paddingTop)
         .filter((v, idx, arr) => idx === 0 || v !== arr[idx - 1]);
       snapCount = snapTargets.length;
       setSnapTotal(snapCount);
     };
 
-    computeSnapTargets();
+    const scheduleComputeSnapTargets = () => {
+      if (rafPendingRef.current) return;
+      rafPendingRef.current = window.requestAnimationFrame(() => {
+        rafPendingRef.current = 0;
+        computeSnapTargetsNow();
+      });
+    };
+
+    scheduleComputeSnapTargets();
 
     const observer = new MutationObserver(() => {
-      computeSnapTargets();
+      scheduleComputeSnapTargets();
     });
     observer.observe(content, { childList: true, subtree: true });
 
     const resizeObserver = new ResizeObserver(() => {
-      computeSnapTargets();
+      scheduleComputeSnapTargets();
     });
     resizeObserver.observe(content);
 
@@ -86,8 +197,6 @@ export function SmoothScrollContainer({
       return bestIdx;
     };
 
-    const easeOutCubic = (t: number) => 1 - Math.pow(1 - t, 3);
-
     const updateActiveIndexFromScroll = () => {
       if (snapTargets.length === 0) return;
       const current = wrapper.scrollTop + wrapper.clientHeight * 0.25;
@@ -101,7 +210,9 @@ export function SmoothScrollContainer({
     const scrollToIndex = (index: number) => {
       if (snapTargets.length === 0) return;
       const nextIndex = Math.max(0, Math.min(index, snapTargets.length - 1));
-      if (nextIndex === activeIndexRef.current && Math.abs(wrapper.scrollTop - snapTargets[nextIndex]) < 2) return;
+      if (nextIndex === activeIndexRef.current && Math.abs(wrapper.scrollTop - snapTargets[nextIndex]) < 2) {
+        return;
+      }
 
       isSnapping = true;
       window.clearTimeout(snapTimer);
@@ -111,17 +222,18 @@ export function SmoothScrollContainer({
 
       lenis.scrollTo(snapTargets[nextIndex], {
         immediate: false,
-        duration: mode === "paged" ? 1.25 : 1.05,
-        easing: easeOutCubic,
+        duration: cfg.duration,
+        easing: paged && !reduceMotion ? easeOutCubic : easeInOutCubic,
       });
 
+      const lockMs = Math.max(220, Math.round(cfg.duration * 1000 + 20));
       snapTimer = window.setTimeout(() => {
         isSnapping = false;
-      }, 1100);
+      }, lockMs);
 
       updateIndexTimer = window.setTimeout(() => {
         updateActiveIndexFromScroll();
-      }, 600);
+      }, Math.max(260, Math.round(cfg.duration * 1000 - 80)));
     };
 
     scrollToIndexRef.current = scrollToIndex;
@@ -129,6 +241,7 @@ export function SmoothScrollContainer({
     const snapToNearest = () => {
       if (snapTargets.length <= 1) return;
       if (isSnapping) return;
+      if (reduceMotion) return;
 
       const current = wrapper.scrollTop + wrapper.clientHeight * 0.2;
       const closest = getClosestIndex(current);
@@ -140,13 +253,17 @@ export function SmoothScrollContainer({
     };
 
     const onScroll = () => {
-      if (snapTargets.length <= 0.5) return;
+      if (snapTargets.length === 0) return;
       if (isSnapping) return;
+
+      updateActiveIndexFromScroll();
 
       window.clearTimeout(scrollEndTimer);
       scrollEndTimer = window.setTimeout(() => {
-        snapToNearest();
-      }, mode === "paged" ? 60 : 140);
+        if (effectiveMode === "paged") {
+          snapToNearest();
+        }
+      }, cfg.snapEndBuffer);
     };
 
     wrapper.addEventListener("scroll", onScroll, { passive: true });
@@ -158,9 +275,11 @@ export function SmoothScrollContainer({
     };
 
     const onWheel = (event: WheelEvent) => {
-      if (mode !== "paged") return;
+      if (effectiveMode !== "paged") return;
       if (snapCount <= 1) return;
       if (isEditableTarget(event.target)) return;
+      if (reduceMotion) return;
+      if (isTouch) return;
 
       event.preventDefault();
 
@@ -172,10 +291,10 @@ export function SmoothScrollContainer({
         wheelWindowTimer = window.setTimeout(() => {
           wheelAccumulator = 0;
           wheelWindowTimer = 0;
-        }, 120);
+        }, 90);
       }
 
-      if (Math.abs(wheelAccumulator) < 8) return;
+      if (Math.abs(wheelAccumulator) < cfg.wheelThreshold) return;
 
       const direction = wheelAccumulator > 0 ? 1 : -1;
       wheelAccumulator = 0;
@@ -189,11 +308,11 @@ export function SmoothScrollContainer({
 
       wheelCooldownTimer = window.setTimeout(() => {
         wheelCooldownTimer = 0;
-      }, 160);
+      }, cfg.wheelCooldown);
     };
 
     const onKeyDown = (event: KeyboardEvent) => {
-      if (mode !== "paged") return;
+      if (effectiveMode !== "paged") return;
       if (snapCount <= 1) return;
       if (isEditableTarget(event.target)) return;
 
@@ -225,7 +344,24 @@ export function SmoothScrollContainer({
       }
     };
 
-    wrapper.addEventListener("wheel", onWheel, { passive: false });
+    const reducedMotionListener = (e: MediaQueryListEvent) => {
+      lenis.options.smoothWheel = !e.matches;
+    };
+
+    const pointerMedia = window.matchMedia("(pointer: coarse)");
+    const pointerListener = () => {
+      const touch = pointerMedia.matches || (navigator.maxTouchPoints && navigator.maxTouchPoints > 1);
+      lenis.options.touchMultiplier = touch
+        ? (reduceMotion ? REDUCED_MOTION.touchMultiplier : paged ? MOBILE_PAGED.touchMultiplier : MOBILE_BUFFERED.touchMultiplier)
+        : (reduceMotion ? REDUCED_MOTION.touchMultiplier : paged ? DESKTOP_PAGED.touchMultiplier : DESKTOP_BUFFERED.touchMultiplier);
+    };
+
+    const reducedMedia = window.matchMedia("(prefers-reduced-motion: reduce)");
+    reducedMedia.addEventListener?.("change", reducedMotionListener);
+    pointerMedia.addEventListener?.("change", pointerListener);
+
+    const useNonPassiveWheel = effectiveMode === "paged" && !isTouch && !reduceMotion;
+    wrapper.addEventListener("wheel", onWheel, { passive: !useNonPassiveWheel });
     window.addEventListener("keydown", onKeyDown);
 
     let rafId = 0;
@@ -242,18 +378,26 @@ export function SmoothScrollContainer({
       wrapper.removeEventListener("scroll", onScroll);
       wrapper.removeEventListener("wheel", onWheel);
       window.removeEventListener("keydown", onKeyDown);
+      reducedMedia.removeEventListener?.("change", reducedMotionListener);
+      pointerMedia.removeEventListener?.("change", pointerListener);
       window.clearTimeout(snapTimer);
       window.clearTimeout(scrollEndTimer);
       window.clearTimeout(updateIndexTimer);
       if (wheelWindowTimer) window.clearTimeout(wheelWindowTimer);
       if (wheelCooldownTimer) window.clearTimeout(wheelCooldownTimer);
+      if (rafPendingRef.current) window.cancelAnimationFrame(rafPendingRef.current);
       window.cancelAnimationFrame(rafId);
       lenis.destroy();
     };
   }, [mode]);
 
   return (
-    <Box ref={wrapperRef} className={className} style={style}>
+    <Box
+      ref={wrapperRef}
+      className={className}
+      style={style}
+      sx={mdStyle ? { "@media screen and (min-width: 48em)": mdStyle } : undefined}
+    >
       <Box ref={contentRef}>{children}</Box>
 
       {showPager && snapTotal > 1 ? (

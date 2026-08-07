@@ -1,6 +1,6 @@
 import { cache } from "react";
 
-import { prisma } from "@/lib/prisma";
+import { prisma, withConnectionGuard } from "@/lib/prisma";
 import type { EventDetail, EventsIndexData, EventSummary } from "@/features/events/types";
 
 type PublishedEventRecord = {
@@ -34,13 +34,15 @@ function mapEvent(record: PublishedEventRecord): EventSummary {
   };
 }
 
-async function safeQuery<T>(operation: () => Promise<T>, fallback: T) {
-  try {
-    return await operation();
-  } catch (error) {
-    console.error("Events query failed", error);
-    return fallback;
-  }
+async function safeQuery<T>(operation: () => Promise<T>, fallback: T, label = "Events") {
+  return withConnectionGuard(
+    operation,
+    () => fallback,
+    (error) => {
+      console.error(`${label} query failed`, error);
+      return fallback;
+    },
+  )();
 }
 
 const getPublishedEventRecords = cache(async () => {
@@ -63,6 +65,7 @@ const getPublishedEventRecords = cache(async () => {
         orderBy: [{ startAt: "asc" }, { updatedAt: "desc" }],
       }) as Promise<PublishedEventRecord[]>,
     [] as PublishedEventRecord[],
+    "Events listing",
   );
 
   return records.map(mapEvent);
@@ -93,6 +96,7 @@ export async function getEventBySlug(slug: string): Promise<EventDetail | null> 
         },
       }) as Promise<PublishedEventDetailRecord | null>,
     null,
+    `Events detail [${slug}]`,
   );
 
   if (!record || !record.published) {
