@@ -111,7 +111,7 @@ These sections are currently content-driven from source files in `src/lib/`:
 
 ### Prerequisites
 
-- Node.js 25+
+- Node.js 24+
 - npm
 - PostgreSQL
 
