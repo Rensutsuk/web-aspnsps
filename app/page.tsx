@@ -1,18 +1,18 @@
 import Hero from './components/home/Hero';
-import ImageScroll from './components/home/ImageScroll';
-import BlogList from './components/home/BlogList';
+import ScheduleOfMasses from './components/home/ScheduleOfMasses';
+import ContactUs from './components/home/ContactUs';
 
 export default function Home() {
   return (
-    <main className="h-dvh overflow-y-auto snap-y snap-mandatory scroll-smooth [scroll-padding-top:64px]">
-      <section className="snap-start [scroll-snap-stop:always] [scroll-margin-top:64px]">
+    <main className="h-dvh overflow-y-auto snap-y snap-mandatory scroll-smooth">
+      <section className="snap-start [scroll-snap-stop:always]">
         <Hero />
       </section>
-      <section className="snap-start [scroll-snap-stop:always] [scroll-margin-top:64px]">
-        <BlogList />
+      <section className="snap-start [scroll-snap-stop:always]">
+        <ScheduleOfMasses />
       </section>
       <section className="snap-start [scroll-snap-stop:always]">
-        <ImageScroll />
+        <ContactUs />
       </section>
     </main>
   );

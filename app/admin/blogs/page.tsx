@@ -2,11 +2,14 @@ import Link from 'next/link'
 import { redirect } from 'next/navigation'
 import { revalidatePath } from 'next/cache'
 import { prisma } from '@/app/db'
+import { requireBlogManager, signOut } from '@/auth'
 
 export const dynamic = 'force-dynamic'
 
 async function togglePublished(formData: FormData) {
   'use server'
+
+  await requireBlogManager()
 
   const slug = String(formData.get('slug') ?? '')
   const nextPublished = String(formData.get('published') ?? '') === 'true'
@@ -27,6 +30,8 @@ async function togglePublished(formData: FormData) {
 async function deletePost(formData: FormData) {
   'use server'
 
+  await requireBlogManager()
+
   const slug = String(formData.get('slug') ?? '')
   if (!slug) redirect('/admin/blogs')
 
@@ -38,7 +43,14 @@ async function deletePost(formData: FormData) {
   redirect('/admin/blogs')
 }
 
+async function logoutAction() {
+  'use server'
+
+  await signOut({ redirectTo: '/admin/login' })
+}
+
 export default async function AdminBlogsPage() {
+  const admin = await requireBlogManager()
   const posts = await prisma.blogPost.findMany({
     select: {
       slug: true,
@@ -57,10 +69,25 @@ export default async function AdminBlogsPage() {
         <div>
           <h1 className="text-3xl font-bold">Blog Admin</h1>
           <p className="opacity-70">Create, edit, publish, and delete posts</p>
+          <p className="text-sm opacity-60">
+            Signed in as {admin.name ?? admin.email} ({admin.role === 'SYSADMIN' ? 'Sysadmin' : 'Blog Admin'})
+          </p>
         </div>
-        <Link href="/admin/blogs/new" className="btn btn-primary">
-          New Post
-        </Link>
+        <div className="flex flex-wrap items-center justify-end gap-2">
+          {admin.role === 'SYSADMIN' ? (
+            <Link href="/admin/users" className="btn btn-outline">
+              Manage Admins
+            </Link>
+          ) : null}
+          <Link href="/admin/blogs/new" className="btn btn-primary">
+            New Post
+          </Link>
+          <form action={logoutAction}>
+            <button type="submit" className="btn btn-ghost">
+              Sign Out
+            </button>
+          </form>
+        </div>
       </div>
 
       <div className="overflow-x-auto bg-base-100 rounded-lg shadow">

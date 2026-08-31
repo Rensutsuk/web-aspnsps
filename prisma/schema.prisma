@@ -12,6 +12,22 @@ datasource db {
   provider = "postgresql"
 }
 
+enum AdminRole {
+  SYSADMIN
+  BLOG_ADMIN
+}
+
+model AdminUser {
+  id           String    @id @default(cuid())
+  email        String    @unique
+  name         String?
+  passwordHash String
+  role         AdminRole @default(BLOG_ADMIN)
+  isActive     Boolean   @default(true)
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+}
+
 model BlogPost {
   id          String   @id @default(cuid())
   slug        String   @unique        // URL key — derived from title or set manually
