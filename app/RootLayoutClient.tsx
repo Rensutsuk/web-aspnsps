@@ -1,6 +1,6 @@
 'use client';
 import { useEffect, useState } from 'react';
-import { Poppins } from "next/font/google";
+import { Cinzel, Cinzel_Decorative, Poppins } from "next/font/google";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import Loading from './components/Loading';
@@ -14,6 +14,18 @@ const poppins = Poppins({
   weight: ['400', '700'],
   subsets: ["latin"],
   variable: "--font-gentium",
+});
+
+const cinzel = Cinzel({
+  weight: ['400', '500', '600', '700', '800', '900'],
+  subsets: ["latin"],
+  variable: "--font-cinzel",
+});
+
+const cinzelDecorative = Cinzel_Decorative({
+  weight: ['400', '700', '900'],
+  subsets: ["latin"],
+  variable: "--font-cinzel-decorative",
 });
 
 export default function RootLayoutClient({
@@ -54,7 +66,7 @@ export default function RootLayoutClient({
 
   return (
     <html data-theme={theme} lang="en">
-      <body className={`${poppins.variable} antialiased bg-base-100 text-base-content`}>
+      <body className={`${poppins.variable} ${cinzel.variable} ${cinzelDecorative.variable} antialiased bg-base-100 text-base-content`}>
         {isLoading && <Loading />}
         <Navbar theme={theme} onToggleTheme={toggleTheme} />
         <main>{children}</main>

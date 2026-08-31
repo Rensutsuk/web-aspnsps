@@ -22,35 +22,35 @@ export default function Navbar({ theme, onToggleTheme }: NavbarProps) {
 
   return (
     <>
-      <div className="navbar bg-primary text-primary-content fixed top-0 z-50">
+      <div className="navbar text-white bg-transparent fixed top-0 z-50 px-4 lg:px-8 py-2">
         <div className="navbar-start">
-          <div className="pl-5 my-1">
+          <div className="my-1 mr-2">
             <Image
               src="/logo.png"
               alt="ASPNSPS Logo"
-              width={35}
-              height={35}
+              width={30}
+              height={30}
             />
           </div>
-          <Link href="/" className="btn btn-ghost text-xl">ASPNSPS</Link>
+          <Link href="/" className="btn btn-ghost text-white hover:text-accent text-2xl font-bold px-0">ASPNSPS</Link>
         </div>
 
         <div className="navbar-center hidden lg:flex">
-          <ul className="menu menu-horizontal px-1">
-            <li><Link href="/">Home</Link></li>
-            <li><Link href="/about">About</Link></li>
-            <li><Link href="/schedule">Mass Schedule</Link></li>
-            <li><Link href="/services">Services</Link></li>
-            <li><Link href="/marriage">Marriage</Link></li>
-            <li><Link href="/ministries">Ministries</Link></li>
-            <li><Link href="/contact">Contact</Link></li>
+          <ul className="menu menu-horizontal px-1 text-base">
+            <li className="hover:text-accent"><Link href="/">HOME</Link></li>
+            <li className="hover:text-accent"><Link href="/about">ABOUT US</Link></li>
+            <li className="hover:text-accent"><Link href="/schedule">NEWS &amp; EVENTS</Link></li>
+            <li className="hover:text-accent"><Link href="/gallery">GALLERY</Link></li>
+            <li className="hover:text-accent"><Link href="/services">SERVICES</Link></li>
+            <li className="hover:text-accent"><Link href="/jubilee">75TH JUBILEE</Link></li>
+            <li className="hover:text-accent"><Link href="/contact">CONTACT US</Link></li>
           </ul>
         </div>
 
-        <div className="navbar-end">
+        <div className="navbar-end ml-auto lg:ml-0">
           <button
             type="button"
-            className="btn btn-ghost btn-circle"
+            className="btn btn-ghost btn-circle bg-transparent hover:bg-transparent hover:text-accent"
             aria-label="Toggle theme"
             onClick={onToggleTheme}
           >
@@ -58,7 +58,7 @@ export default function Navbar({ theme, onToggleTheme }: NavbarProps) {
           </button>
 
           <button
-            className="btn btn-ghost lg:hidden"
+            className="btn btn-ghost lg:hidden bg-transparent hover:bg-transparent hover:text-accent"
             aria-label="Menu"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
           >
@@ -78,63 +78,63 @@ export default function Navbar({ theme, onToggleTheme }: NavbarProps) {
               <Link
                 href="/"
                 onClick={() => setIsMenuOpen(false)}
-                className="text-2xl py-4 text-center text-primary-content hover:bg-primary-focus"
+                className="text-2xl py-4 text-center text-white hover:text-accent hover:bg-primary-focus/15"
               >
-                Home
+                HOME
               </Link>
             </li>
             <li>
               <Link
                 href="/about"
                 onClick={() => setIsMenuOpen(false)}
-                className="text-2xl py-4 text-center text-primary-content hover:bg-primary-focus"
+                className="text-2xl py-4 text-center text-white hover:text-accent hover:bg-primary-focus/15"
               >
-                About
+                ABOUT US
               </Link>
             </li>
             <li>
               <Link
                 href="/schedule"
                 onClick={() => setIsMenuOpen(false)}
-                className="text-2xl py-4 text-center text-primary-content hover:bg-primary-focus"
+                className="text-2xl py-4 text-center text-white hover:text-accent hover:bg-primary-focus/15"
               >
-                Mass Schedule
+                NEWS &amp; EVENTS
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/gallery"
+                onClick={() => setIsMenuOpen(false)}
+                className="text-2xl py-4 text-center text-white hover:text-accent hover:bg-primary-focus/15"
+              >
+                GALLERY
               </Link>
             </li>
             <li>
               <Link
                 href="/services"
                 onClick={() => setIsMenuOpen(false)}
-                className="text-2xl py-4 text-center text-primary-content hover:bg-primary-focus"
+                className="text-2xl py-4 text-center text-white hover:text-accent hover:bg-primary-focus/15"
               >
-                Services
+                SERVICES
               </Link>
             </li>
             <li>
               <Link
-                href="/marriage"
+                href="/jubilee"
                 onClick={() => setIsMenuOpen(false)}
-                className="text-2xl py-4 text-center text-primary-content hover:bg-primary-focus"
+                className="text-2xl py-4 text-center text-white hover:text-accent hover:bg-primary-focus/15"
               >
-                Marriage
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="/ministries"
-                onClick={() => setIsMenuOpen(false)}
-                className="text-2xl py-4 text-center text-primary-content hover:bg-primary-focus"
-              >
-                Ministries
+                75TH JUBILEE
               </Link>
             </li>
             <li>
               <Link
                 href="/contact"
                 onClick={() => setIsMenuOpen(false)}
-                className="text-2xl py-4 text-center text-primary-content hover:bg-primary-focus"
+                className="text-2xl py-4 text-center text-white hover:text-accent hover:bg-primary-focus/15"
               >
-                Contact
+                CONTACT US
               </Link>
             </li>
           </ul>
