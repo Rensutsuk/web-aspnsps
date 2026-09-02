@@ -103,41 +103,41 @@ export default function HistoryPage() {
   const scrollTo = (index: number) => emblaApi?.scrollTo(index);
 
   return (
-    <div className="relative h-screen overflow-hidden bg-base-100">
+    <div className="relative h-screen overflow-hidden bg-base-100 dark:bg-neutral">
       <div className="h-full">
         <div className="relative h-full">
           <div ref={emblaRef} className="h-full overflow-hidden">
             <div className="flex">
               {SLIDES.map((slide, index) => (
                 <div key={slide.title} className="history-slide min-w-0 flex-[0_0_100%]">
-                  <div className="relative h-screen overflow-hidden bg-base-200">
+                  <div className="relative h-screen overflow-hidden bg-base-200 dark:bg-base-200/40">
                     <div className="absolute inset-0">
                       <Image
                         src={slide.image}
                         alt={slide.title}
                         fill
                         sizes="100vw"
-                        className="object-cover"
+                        className="object-cover dark:brightness-75 dark:contrast-110"
                         priority={index === 0}
                       />
-                      <div className="absolute inset-0 bg-gradient-to-r from-base-100 via-base-100/50 to-base-100/20" />
+                      <div className="absolute inset-0 bg-gradient-to-r from-base-100 via-base-100/50 to-base-100/20 dark:from-neutral dark:via-neutral/60 dark:to-neutral/30" />
                     </div>
 
                     <div className="relative z-10 flex h-full items-end md:items-center px-6 py-16 md:px-12">
                       <div className="max-w-3xl">
-                        <p className="text-sm font-semibold uppercase tracking-[0.2em] text-primary">
+                        <p className="text-sm font-semibold uppercase tracking-[0.2em] text-primary dark:text-accent">
                           {slide.label}
                         </p>
-                        <h1 className="mt-3 text-4xl font-bold md:text-6xl">{slide.title}</h1>
+                        <h1 className="mt-3 text-4xl font-bold md:text-6xl text-primary dark:text-primary-content">{slide.title}</h1>
                         {slide.subtitle && (
-                          <p className="mt-4 text-lg md:text-2xl text-base-content/80">{slide.subtitle}</p>
+                          <p className="mt-4 text-lg md:text-2xl text-base-content/80 dark:text-primary-content/85">{slide.subtitle}</p>
                         )}
-                        <div className="mt-6 space-y-4 text-base-content/80 leading-relaxed md:text-lg">
+                        <div className="mt-6 space-y-4 text-base-content/80 dark:text-primary-content/85 leading-relaxed md:text-lg">
                           {slide.paragraphs.map((paragraph) => (
                             <p key={paragraph}>{paragraph}</p>
                           ))}
                         </div>
-                        <p className="mt-8 text-sm font-semibold text-base-content/60">
+                        <p className="mt-8 text-sm font-semibold text-base-content/60 dark:text-primary-content/50">
                           {index + 1} / {SLIDES.length}
                         </p>
                       </div>
@@ -149,7 +149,7 @@ export default function HistoryPage() {
           </div>
 
           <div className="absolute inset-x-0 bottom-0 z-20 flex items-center gap-4 p-4 md:p-6">
-            <button type="button" className="btn btn-circle" aria-label="Previous slide" onClick={scrollPrev} disabled={!emblaApi}>
+            <button type="button" className="btn btn-circle bg-base-100/90 dark:bg-neutral/90 text-primary dark:text-primary-content hover:bg-primary hover:text-primary-content dark:hover:bg-primary dark:hover:text-primary-content border border-base-300/40 dark:border-primary/30 transition-colors" aria-label="Previous slide" onClick={scrollPrev} disabled={!emblaApi}>
               ‹
             </button>
 
@@ -161,7 +161,7 @@ export default function HistoryPage() {
                     type="button"
                     onClick={() => scrollTo(i)}
                     data-active={i === selectedIndex ? "true" : "false"}
-                    className={`btn btn-sm rounded-full transition-colors ${i === selectedIndex ? "btn-primary" : "btn-ghost"}`}
+                    className={`btn btn-sm rounded-full transition-colors ${i === selectedIndex ? "btn-primary" : "btn-ghost hover:bg-primary/15 text-base-content dark:text-primary-content"}`}
                   >
                     {label}
                   </button>
@@ -169,14 +169,14 @@ export default function HistoryPage() {
               </div>
             </div>
 
-            <button type="button" className="btn btn-circle" aria-label="Next slide" onClick={scrollNext} disabled={!emblaApi}>
+            <button type="button" className="btn btn-circle bg-base-100/90 dark:bg-neutral/90 text-primary dark:text-primary-content hover:bg-primary hover:text-primary-content dark:hover:bg-primary dark:hover:text-primary-content border border-base-300/40 dark:border-primary/30 transition-colors" aria-label="Next slide" onClick={scrollNext} disabled={!emblaApi}>
               ›
             </button>
           </div>
 
           {/* Back Button */}
           <div className="absolute right-4 top-4 z-20 md:right-6 md:top-6">
-            <a href="/about" className="btn btn-primary btn-sm md:btn-md">
+            <a href="/about" className="btn btn-primary btn-sm md:btn-md hover:bg-primary-focus transition-colors">
               Back to About
             </a>
           </div>

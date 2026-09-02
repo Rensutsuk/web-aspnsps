@@ -6,43 +6,91 @@ import useEmblaCarousel from "embla-carousel-react";
 import Fade from "embla-carousel-fade";
 import { FaChevronDown, FaChevronLeft, FaChevronRight } from "react-icons/fa";
 
-export default function ScheduleOfMasses() {
-  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true, duration: 300 }, [
-    Fade(),
-  ]);
-  const [selectedIndex, setSelectedIndex] = useState(0);
-  const [slidesCount, setSlidesCount] = useState(0);
+const SCHEDULE_SLIDES = [
+  {
+    id: "weekdays",
+    heading: "MONDAYS TO SATURDAYS",
+    times: [
+      ["6:00 AM", "06:00 PM"],
+    ],
+    sub: {
+      heading: "WEDNESDAYS",
+      times: [
+        ["6:30 AM", "12:15 PM", "06:00 PM"],
+      ],
+    },
+  },
+  {
+    id: "sundays",
+    heading: "SUNDAYS",
+    grid: [
+      ["6:00 AM", "12:15 PM"],
+      ["7:00 AM", "4:00 PM"],
+      ["8:30 AM", "5:30 PM"],
+      ["10:00 AM", "7:00 PM"],
+    ],
+  },
+  {
+    id: "prayers",
+    blocks: [
+      {
+        heading: "LAUDS & VESPERS",
+        sub: "(MORNING AND EVENING PRAYER)",
+        body: "Everyday before 6AM & 6PM Holy Mass",
+      },
+      {
+        heading: "DAILY ROSARY",
+        body: "Before Every Holy Mass during weekdays",
+      },
+      {
+        heading: "EXPOSITION & BENEDICTION OF THE BLESSED SACRAMENT",
+        body: "Wednesdays & First Fridays | 5:00 PM",
+      },
+    ],
+  },
+  {
+    id: "novena",
+    blocks: [
+      {
+        heading: "NOVENA TO OMPH",
+        body1: "WEDNESDAYS |",
+        body2: "6:00AM, 11:30AM & 5:00PM",
+      },
+    ],
+    firstSaturday: [
+      ["5:00 AM", "Dawn Procession"],
+      ["6:00 AM", "Holy Mass"],
+      ["11:00 AM", "Healing Mass"],
+      ["6:00 PM", "Anticipated Mass"],
+    ],
+  },
+] as const;
 
-  const onSelect = useCallback(() => {
-    if (!emblaApi) return;
-    setSelectedIndex(emblaApi.selectedScrollSnap());
-  }, [emblaApi]);
+export default function ScheduleOfMasses() {
+  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true, duration: 60 }, [Fade()]);
+  const [selectedIndex, setSelectedIndex] = useState(0);
+
+  const scrollPrev = useCallback(() => emblaApi?.scrollPrev(), [emblaApi]);
+  const scrollNext = useCallback(() => emblaApi?.scrollNext(), [emblaApi]);
+  const scrollTo = useCallback((index: number) => emblaApi?.scrollTo(index), [emblaApi]);
 
   useEffect(() => {
     if (!emblaApi) return;
-    setSlidesCount(emblaApi.scrollSnapList().length);
-    setSelectedIndex(emblaApi.selectedScrollSnap());
-    emblaApi.on("select", onSelect);
+
+    const onSelect = () => setSelectedIndex(emblaApi.selectedScrollSnap());
+    onSelect();
+    emblaApi.on('select', onSelect);
+    emblaApi.on('reInit', onSelect);
+
     return () => {
-      emblaApi.off("select", onSelect);
+      emblaApi.off('select', onSelect);
+      emblaApi.off('reInit', onSelect);
     };
-  }, [emblaApi, onSelect]);
+  }, [emblaApi]);
 
   const handleScrollNext = () => {
-    const sections = Array.from(
-      document.querySelectorAll<HTMLElement>("main > section"),
-    );
-    let idx = -1;
-    for (let i = 0; i < sections.length; i++) {
-      const rect = sections[i].getBoundingClientRect();
-      if (rect.top >= -10 && rect.top <= window.innerHeight * 0.5) {
-        idx = i;
-        break;
-      }
-    }
-    if (idx === -1) return;
-    const next = sections[idx + 1] ?? sections[0];
-    next?.scrollIntoView({ behavior: "smooth" });
+    const nextSection = document.querySelector('section + section + section') as HTMLElement | null;
+    nextSection?.scrollIntoView({ behavior: 'smooth' });
   };
 
   return (
@@ -56,7 +104,7 @@ export default function ScheduleOfMasses() {
           className="w-full h-full object-cover"
           quality={85}
         />
-        <div className="absolute inset-0 bg-black/60" />
+        <div className="absolute inset-0" />
       </div>
 
       <div className="relative z-10 w-full h-[calc(100vh-8vh)] bg-base-100 mt-15 md:mt-20 lg:mt-20 overflow-hidden">
@@ -72,7 +120,7 @@ export default function ScheduleOfMasses() {
 
         {/* ========== MD / LG / XL (≥768px) — STATIC 3-COL LAYOUT ========== */}
         <div className="relative z-10 h-full w-full md:px-12 lg:px-20 xl:px-28 md:py-8 lg:py-10 flex-col gap-0 hidden md:flex">
-          <h1 className="text-accent text-center font-[family-name:var(--font-cinzel-decorative)] md:text-xl lg:text-3xl xl:text-5xl font-black leading-tight md:tracking-[0.1em] uppercase md:mb-4 drop-shadow-md self-center md:mb-0 lg:mb-4 xl:mb-20">
+          <h1 className="text-accent text-center md:text-3xl lg:text-4xl xl:text-5xl font-black leading-tight md:tracking-[0.1em] uppercase md:mb-4 drop-shadow-md self-center md:mb-0 lg:mb-4 xl:mb-20"> 
             SCHEDULE OF MASSES, PRAYERS AND NOVENAS
           </h1>
 
@@ -203,7 +251,7 @@ export default function ScheduleOfMasses() {
 
         {/* ========== SM / XS (<768px) — CAROUSEL SLIDES ========== */}
         <div className="z-10 h-[calc(100vh-15vh)] w-full px-4 sm:px-6 py-4 sm:py-6 flex flex-col justify-center items-center md:hidden">
-          <h1 className="text-accent text-center font-[family-name:var(--font-cinzel-decorative)] text-xl sm:text-2xl font-black leading-none tracking-wide uppercase mb-2 sm:mb-3 drop-shadow-sm self-center">
+          <h1 className="text-accent text-center text-2xl sm:text-2xl font-black leading-none tracking-wide uppercase mb-2 sm:mb-3 drop-shadow-sm self-center border-b-4 border-secondary dark:border-primary-content/70">
             SCHEDULE OF MASSES, PRAYERS AND NOVENAS
           </h1>
 
@@ -211,7 +259,7 @@ export default function ScheduleOfMasses() {
             <div ref={emblaRef} className="w-full h-full">
               <div className="flex w-full h-full">
                 {/* Slide 1 — Weekday Masses */}
-                <div className="min-w-0 flex-[0_0_100%] h-full px-1 sm:px-2 flex flex-col justify-center items-center text-primary-content space-y-6 sm:space-y-8">
+                <div className="relative min-w-full h-full [&>*]:opacity-100 px-1 sm:px-2 flex flex-col justify-center items-center text-primary-content space-y-6 sm:space-y-8">
                   <div className="text-center space-y-1 w-full">
                     <h3 className="text-lg sm:text-xl font-black tracking-[0.2em] uppercase mb-2">
                       MONDAYS TO SATURDAYS
@@ -222,7 +270,7 @@ export default function ScheduleOfMasses() {
                     </div>
                   </div>
                   <div className="text-center space-y-1 w-full">
-                    <h3 className="text-lg sm:text-xl font-black tracking-[0.2em] uppercase mb-2">  
+                    <h3 className="text-lg sm:text-xl font-black tracking-[0.2em] uppercase mb-2">
                       WEDNESDAYS
                     </h3>
                     <div className="flex flex-col sm:flex-row justify-center gap-2 sm:gap-8 text-base sm:text-lg font-medium text-base-content">
@@ -234,9 +282,9 @@ export default function ScheduleOfMasses() {
                 </div>
 
                 {/* Slide 2 — Sunday Masses */}
-                <div className="min-w-0 flex-[0_0_100%] h-full px-1 sm:px-2 flex flex-col justify-center items-center text-primary-content">
+                <div className="relative min-w-full h-full [&>*]:opacity-100 px-1 sm:px-2 flex flex-col justify-center items-center text-primary-content">
                   <div className="text-center w-full space-y-3">
-                    <h3 className="font-mono text-lg sm:text-xl font-black tracking-[0.2em] uppercase mb-2">
+                    <h3 className="text-lg sm:text-xl font-black tracking-[0.2em] uppercase mb-2">
                       SUNDAYS
                     </h3>
                     <div className="grid grid-cols-2 gap-x-8 sm:gap-x-12 gap-y-2 text-base sm:text-lg font-medium text-base-content max-w-sm mx-auto">
@@ -253,7 +301,7 @@ export default function ScheduleOfMasses() {
                 </div>
 
                 {/* Slide 3 — Prayers */}
-                <div className="min-w-0 flex-[0_0_100%] h-full px-1 sm:px-2 flex flex-col justify-center items-center text-primary-content space-y-4 sm:space-y-5">
+                <div className="relative min-w-full h-full [&>*]:opacity-100 px-1 sm:px-2 flex flex-col justify-center items-center text-primary-content space-y-4 sm:space-y-5">
                   <div className="text-center w-full">
                     <h3 className="text-lg sm:text-xl font-black tracking-[0.2em] uppercase mb-1">
                       LAUDS &amp; VESPERS
@@ -284,7 +332,7 @@ export default function ScheduleOfMasses() {
                 </div>
 
                 {/* Slide 4 — Novena + First Saturday */}
-                <div className="min-w-0 flex-[0_0_100%] h-full px-1 sm:px-2 flex flex-col justify-center items-center text-primary-content space-y-5 sm:space-y-6">
+                <div className="relative min-w-full h-full [&>*]:opacity-100 px-1 sm:px-2 flex flex-col justify-center items-center text-primary-content space-y-5 sm:space-y-6">
                   <div className="text-center w-full">
                     <h3 className="text-lg sm:text-xl font-black tracking-[0.2em] uppercase mb-1">
                       NOVENA TO OMPH
@@ -306,9 +354,7 @@ export default function ScheduleOfMasses() {
                         <span className="font-bold text-primary-content whitespace-nowrap text-sm sm:text-base">
                           5:00 AM
                         </span>
-                        <span className="text-sm sm:text-lg">
-                          Dawn Procession
-                        </span>
+                        <span className="text-sm sm:text-lg">Dawn Procession</span>
                         <span className="font-bold text-primary-content whitespace-nowrap text-sm sm:text-base">
                           6:00 AM
                         </span>
@@ -320,9 +366,7 @@ export default function ScheduleOfMasses() {
                         <span className="font-bold text-primary-content whitespace-nowrap text-sm sm:text-base">
                           6:00 PM
                         </span>
-                        <span className="text-sm sm:text-lg">
-                          Anticipated Mass
-                        </span>
+                        <span className="text-sm sm:text-lg">Anticipated Mass</span>
                       </div>
                     </div>
                   </div>
@@ -332,38 +376,41 @@ export default function ScheduleOfMasses() {
 
             <button
               type="button"
-              onClick={() => emblaApi?.scrollPrev()}
+              onClick={scrollPrev}
               aria-label="Previous slide"
-              className="absolute left-0 sm:left-1 top-1/2 -translate-y-1/2 z-20 w-8 h-8 sm:w-10 sm:h-10 flex items-center justify-center rounded-full text-primary-content hover:text-accent transition-colors bg-base-100/60 backdrop-blur-sm"
+              className="z-20 absolute left-1 sm:left-2 top-1/2 -translate-y-1/2 w-12 h-12 sm:w-14 sm:h-14 text-primary-content hover:text-accent hover:scale-110 transition-all duration-300 flex items-center justify-center"
             >
-              <FaChevronLeft className="w-5 h-5 sm:w-6 sm:h-6" />
+              <FaChevronLeft className="w-full h-full" strokeWidth={1.5} />
             </button>
+
             <button
               type="button"
-              onClick={() => emblaApi?.scrollNext()}
+              onClick={scrollNext}
               aria-label="Next slide"
-              className="absolute right-0 sm:right-1 top-1/2 -translate-y-1/2 z-20 w-8 h-8 sm:w-10 sm:h-10 flex items-center justify-center rounded-full text-primary-content hover:text-accent transition-colors bg-base-100/60 backdrop-blur-sm"
+              className="z-20 absolute right-1 sm:right-2 top-1/2 -translate-y-1/2 w-12 h-12 sm:w-14 sm:h-14 text-primary-content hover:text-accent hover:scale-110 transition-all duration-300 flex items-center justify-center"
             >
-              <FaChevronRight className="w-5 h-5 sm:w-6 sm:h-6" />
+              <FaChevronRight className="w-full h-full" strokeWidth={1.5} />
             </button>
           </div>
-
-          <div className="flex justify-center gap-2 mt-2 sm:mt-3 z-20">
-            {Array.from({ length: slidesCount }).map((_, i) => (
-              <button
-                type="button"
-                key={i}
-                onClick={() => emblaApi?.scrollTo(i)}
-                aria-label={`Go to slide ${i + 1}`}
-                className={`h-2 sm:h-2.5 rounded-full transition-all duration-300 ${
-                  i === selectedIndex
-                    ? "bg-primary-content w-6 sm:w-8"
-                    : "bg-accent/80 w-2 sm:w-2.5"
-                }`}
-              />
-            ))}
-          </div>
         </div>
+
+        {/* dots moved to very bottom of card, above chevron-down (only sm/xs) */}
+        <div className="z-20 absolute left-1/2 -translate-x-1/2 flex items-center gap-2 sm:gap-3 md:hidden bottom-14 sm:bottom-16">
+          {SCHEDULE_SLIDES.map((_, i) => (
+            <button
+              key={i}
+              type="button"
+              onClick={() => scrollTo(i)}
+              aria-label={`Go to slide ${i + 1}`}
+              className={`rounded-full transition-all duration-300 ${
+                selectedIndex === i
+                  ? 'w-4 h-4 sm:w-5 sm:h-5 bg-primary-content scale-110'
+                  : 'w-3 h-3 sm:w-3.5 sm:h-3.5 bg-accent hover:bg-accent/80 hover:scale-105'
+              }`}
+            />
+          ))}
+        </div>
+
         <button
           type="button"
           onClick={handleScrollNext}

@@ -34,10 +34,10 @@ export default function ContactUs() {
           alt="Shrine banner"
           fill
           sizes="100vw"
-          className="w-full h-full object-cover object-[center_20%]"
+          className="w-full h-full object-cover"
           quality={85}
         />
-        <div className="absolute inset-0 bg-black/60" />
+        <div className="absolute inset-0" />
       </div>
 
       <div className="relative z-10 w-full h-[calc(100vh-8vh)] bg-base-100 mt-15 md:mt-20 lg:mt-20 overflow-hidden">
@@ -66,54 +66,54 @@ export default function ContactUs() {
                   <span className="shrink-0 mt-0.5 w-10 h-10 md:w-11 md:h-11 lg:w-12 lg:h-12 rounded-full border-2 border-primary dark:border-primary-content/60 flex items-center justify-center text-primary dark:text-primary-content text-lg md:text-xl lg:text-2xl">
                     <FaLocationDot />
                   </span>
-                  <p className="text-sm md:text-base lg:text-xl text-base-content pt-1 md:pt-1.5">
+                  <a className="text-sm md:text-base lg:text-xl text-base-content pt-1 md:pt-1.5" href='https://maps.app.goo.gl/virT5NJPjgCFcxnL8' target="_blank" rel="noopener noreferrer">
                     2042 Calamba St. corner Instruccion St., Sampaloc, Manila
-                  </p>
+                  </a>
                 </li>
 
                 <li className="flex items-center gap-3 md:gap-4 lg:gap-5">
                   <span className="shrink-0 w-10 h-10 md:w-11 md:h-11 lg:w-12 lg:h-12 rounded-full border-2 border-primary dark:border-primary-content/60 flex items-center justify-center text-primary dark:text-primary-content text-lg md:text-xl lg:text-2xl">
                     <FaPhone />
                   </span>
-                  <p className="text-sm md:text-base lg:text-xl text-base-content">
+                  <a className="text-sm md:text-base lg:text-xl text-base-content" href="tel:0287418010">
                     (02) 8741 8010
-                  </p>
+                  </a>
                 </li>
 
                 <li className="flex items-center gap-3 md:gap-4 lg:gap-5">
                   <span className="shrink-0 w-10 h-10 md:w-11 md:h-11 lg:w-12 lg:h-12 rounded-full border-2 border-primary dark:border-primary-content/60 flex items-center justify-center text-primary dark:text-primary-content text-lg md:text-xl lg:text-2xl">
                     <FaEnvelope />
                   </span>
-                  <p className="text-sm md:text-base lg:text-xl text-base-content">
+                  <a className="text-sm md:text-base lg:text-xl text-base-content" href="mailto:nsps_parish@yahoo.com">
                     nsps_parish@yahoo.com
-                  </p>
+                  </a>
                 </li>
 
                 <li className="flex items-center gap-3 md:gap-4 lg:gap-5">
                   <span className="shrink-0 w-10 h-10 md:w-11 md:h-11 lg:w-12 lg:h-12 rounded-full border-2 border-primary dark:border-primary-content/60 flex items-center justify-center text-primary dark:text-primary-content text-lg md:text-xl lg:text-2xl">
                     <FaFacebookF />
                   </span>
-                  <p className="text-sm md:text-base lg:text-xl text-base-content">
-                    facebook.com/aspnpsofficial
-                  </p>
+                  <a className="text-sm md:text-base lg:text-xl text-base-content" href="https://www.facebook.com/aspnspsofficial" target="_blank" rel="noopener noreferrer">
+                    facebook.com/aspnspsofficial
+                  </a>
                 </li>
 
                 <li className="flex items-center gap-3 md:gap-4 lg:gap-5">
                   <span className="shrink-0 w-10 h-10 md:w-11 md:h-11 lg:w-12 lg:h-12 rounded-full border-2 border-primary dark:border-primary-content/60 flex items-center justify-center text-primary dark:text-primary-content text-lg md:text-xl lg:text-2xl">
                     <FaInstagram />
                   </span>
-                  <p className="text-sm md:text-base lg:text-xl text-base-content">
-                    instagram.com/aspnpsofficial
-                  </p>
+                  <a className="text-sm md:text-base lg:text-xl text-base-content" href="https://www.instagram.com/aspnspsofficial/" target="_blank" rel="noopener noreferrer">
+                    instagram.com/aspnspsofficial
+                  </a>
                 </li>
 
                 <li className="flex items-center gap-3 md:gap-4 lg:gap-5">
                   <span className="shrink-0 w-10 h-10 md:w-11 md:h-11 lg:w-12 lg:h-12 rounded-full border-2 border-primary dark:border-primary-content/60 flex items-center justify-center text-primary dark:text-primary-content text-lg md:text-xl lg:text-2xl">
                     <FaTiktok />
                   </span>
-                  <p className="text-sm md:text-base lg:text-xl text-base-content">
-                    tiktok.com/aspnpsofficial
-                  </p>
+                  <a className="text-sm md:text-base lg:text-xl text-base-content" href="https://www.tiktok.com/@aspnspsofficial" target="_blank" rel="noopener noreferrer">
+                    tiktok.com/@aspnspsofficial
+                  </a>
                 </li>
               </ul>
 
@@ -143,12 +143,14 @@ export default function ContactUs() {
 
             <div className="flex justify-center lg:justify-end items-center h-full">
               <div className="relative w-full max-w-sm md:max-w-md h-full flex items-center justify-center">
-                <img
+                <Image
                   src="/img/home/omph-icon.png"
                   alt="Nuestra Señora del Perpetuo Socorro Icon"
                   className="h-auto max-h-[88%] w-auto object-contain"
-                  width="600"
-                  height="800"
+                  width={600}
+                  height={800}
+                  priority
+                  sizes="(max-width: 768px) 72vw, (max-width: 1024px) 38vw, 360px"
                 />
               </div>
             </div>
@@ -167,60 +169,60 @@ export default function ContactUs() {
                 <span className="shrink-0 mt-0.5 w-10 h-10 sm:w-11 sm:h-11 rounded-full border-2 border-primary dark:border-primary-content/60 flex items-center justify-center text-primary dark:text-primary-content text-lg sm:text-xl">
                   <FaLocationDot />
                 </span>
-                <p className="text-sm sm:text-base text-base-content pt-1">
+                <a className="text-sm sm:text-base text-base-content pt-1" href="https://maps.app.goo.gl/virT5NJPjgCFcxnL8" target="_blank" rel="noopener noreferrer">
                   2042 Calamba St. corner Instruccion St., Sampaloc, Manila
-                </p>
+                </a>
               </li>
               <li className="flex items-center gap-3 sm:gap-4">
                 <span className="shrink-0 w-10 h-10 sm:w-11 sm:h-11 rounded-full border-2 border-primary dark:border-primary-content/60 flex items-center justify-center text-primary dark:text-primary-content text-lg sm:text-xl">
                   <FaPhone />
                 </span>
-                <p className="text-sm sm:text-base text-base-content">
+                <a className="text-sm sm:text-base text-base-content" href="tel:0287418010">
                   (02) 8741 8010
-                </p>
+                </a>
               </li>
               <li className="flex items-center gap-3 sm:gap-4">
                 <span className="shrink-0 w-10 h-10 sm:w-11 sm:h-11 rounded-full border-2 border-primary dark:border-primary-content/60 flex items-center justify-center text-primary dark:text-primary-content text-lg sm:text-xl">
                   <FaEnvelope />
                 </span>
-                <p className="text-sm sm:text-base text-base-content">
+                <a className="text-sm sm:text-base text-base-content" href="mailto:nsps_parish@yahoo.com">
                   nsps_parish@yahoo.com
-                </p>
+                </a>
               </li>
               <li className="flex items-center gap-3 sm:gap-4">
                 <span className="shrink-0 w-10 h-10 sm:w-11 sm:h-11 rounded-full border-2 border-primary dark:border-primary-content/60 flex items-center justify-center text-primary dark:text-primary-content text-lg sm:text-xl">
                   <FaFacebookF />
                 </span>
-                <p className="text-sm sm:text-base text-base-content">
-                  facebook.com/aspnpsofficial
-                </p>
+                <a className="text-sm sm:text-base text-base-content" href="https://www.facebook.com/aspnspsofficial/" target="_blank" rel="noopener noreferrer">
+                  facebook.com/aspnspsofficial
+                </a>
               </li>
               <li className="flex items-center gap-3 sm:gap-4">
                 <span className="shrink-0 w-10 h-10 sm:w-11 sm:h-11 rounded-full border-2 border-primary dark:border-primary-content/60 flex items-center justify-center text-primary dark:text-primary-content text-lg sm:text-xl">
                   <FaInstagram />
                 </span>
-                <p className="text-sm sm:text-base text-base-content">
-                  instagram.com/aspnpsofficial
-                </p>
+                <a className="text-sm sm:text-base text-base-content" href="https://www.instagram.com/aspnspsofficial/" target="_blank" rel="noopener noreferrer">
+                  instagram.com/aspnspsofficial
+                </a>
               </li>
               <li className="flex items-center gap-3 sm:gap-4">
                 <span className="shrink-0 w-10 h-10 sm:w-11 sm:h-11 rounded-full border-2 border-primary dark:border-primary-content/60 flex items-center justify-center text-primary dark:text-primary-content text-lg sm:text-xl">
                   <FaTiktok />
                 </span>
-                <p className="text-sm sm:text-base text-base-content">
-                  tiktok.com/aspnpsofficial
-                </p>
+                <a className="text-sm sm:text-base text-base-content" href="https://www.tiktok.com/@aspnspsofficial" target="_blank" rel="noopener noreferrer">
+                  tiktok.com/aspnspsofficial
+                </a>
               </li>
             </ul>
 
             <div className="flex justify-center my-4 sm:my-6">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
+              <Image
                 src="/img/home/omph-icon.png"
                 alt="Nuestra Señora del Perpetuo Socorro Icon"
                 className="w-full max-w-[72%] h-auto"
-                width="600"
-                height="800"
+                width={600}
+                height={800}
+                sizes="72vw"
               />
             </div>
 

@@ -22,6 +22,16 @@ export default function Navbar({ theme, onToggleTheme }: NavbarProps) {
 
   return (
     <>
+      {/* Navbar vignette — radial + linear dark feather behind the navbar */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none fixed inset-x-0 top-0 z-40 h-24 sm:h-32 md:h-40"
+        style={{
+          background:
+            'radial-gradient(ellipse 85% 110% at 50% -10%, rgba(0,0,0,0.62) 0%, rgba(0,0,0,0.42) 45%, rgba(0,0,0,0.15) 72%, rgba(0,0,0,0) 100%), linear-gradient(to bottom, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.25) 50%, rgba(0,0,0,0) 100%)',
+        }}
+      />
+
       <div className="navbar text-white bg-transparent fixed top-0 z-50 px-4 lg:px-8 py-2">
         <div className="navbar-start">
           <div className="my-1 mr-2">
@@ -39,7 +49,7 @@ export default function Navbar({ theme, onToggleTheme }: NavbarProps) {
           <ul className="menu menu-horizontal px-1 text-base">
             <li className="hover:text-accent"><Link href="/">HOME</Link></li>
             <li className="hover:text-accent"><Link href="/about">ABOUT US</Link></li>
-            <li className="hover:text-accent"><Link href="/schedule">NEWS &amp; EVENTS</Link></li>
+            <li className="hover:text-accent"><Link href="/blog">NEWS &amp; EVENTS</Link></li>
             <li className="hover:text-accent"><Link href="/gallery">GALLERY</Link></li>
             <li className="hover:text-accent"><Link href="/services">SERVICES</Link></li>
             <li className="hover:text-accent"><Link href="/jubilee">75TH JUBILEE</Link></li>
@@ -94,7 +104,7 @@ export default function Navbar({ theme, onToggleTheme }: NavbarProps) {
             </li>
             <li>
               <Link
-                href="/schedule"
+                href="/blog"
                 onClick={() => setIsMenuOpen(false)}
                 className="text-2xl py-4 text-center text-white hover:text-accent hover:bg-primary-focus/15"
               >

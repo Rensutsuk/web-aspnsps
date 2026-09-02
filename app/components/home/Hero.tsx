@@ -15,12 +15,9 @@ const HERO_IMAGES = [
   '/img/home/home-2.jpg',
 ];
 
-const AUTOPLAY_MS = 6000;
-
 export default function Hero() {
-  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true, duration: 300 }, [Fade()]);
+  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true, duration: 200 }, [Fade()]);
   const [selectedIndex, setSelectedIndex] = useState(0);
-  const [hovering, setHovering] = useState(false);
 
   const scrollPrev = useCallback(() => emblaApi?.scrollPrev(), [emblaApi]);
   const scrollNext = useCallback(() => emblaApi?.scrollNext(), [emblaApi]);
@@ -40,22 +37,8 @@ export default function Hero() {
     };
   }, [emblaApi]);
 
-  useEffect(() => {
-    if (!emblaApi || hovering) return;
-
-    const interval = setInterval(() => {
-      emblaApi.scrollNext();
-    }, AUTOPLAY_MS);
-
-    return () => clearInterval(interval);
-  }, [emblaApi, hovering]);
-
   return (
-    <section
-      className="relative min-h-screen w-full overflow-hidden"
-      onMouseEnter={() => setHovering(true)}
-      onMouseLeave={() => setHovering(false)}
-    >
+    <section className="relative min-h-screen w-full overflow-hidden">
       <div ref={emblaRef} className="absolute inset-0">
         <div className="flex h-full">
           {HERO_IMAGES.map((src, i) => (
