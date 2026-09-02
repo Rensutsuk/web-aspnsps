@@ -15,7 +15,7 @@ export default function NotFound() {
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <Link 
             href="/" 
-            className="btn btn-primary gap-2"
+            className="btn btn-primary text-white gap-2"
           >
             <FaHome />
             Back to Home

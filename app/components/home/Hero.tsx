@@ -15,10 +15,8 @@ const HERO_IMAGES = [
   '/img/home/home-2.jpg',
 ];
 
-const AUTOPLAY_MS = 6000;
-
 export default function Hero() {
-  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true, duration: 300 }, [Fade()]);
+  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true, duration: 200 }, [Fade()]);
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [hovering, setHovering] = useState(false);
 
@@ -39,16 +37,6 @@ export default function Hero() {
       emblaApi.off('reInit', onSelect);
     };
   }, [emblaApi]);
-
-  useEffect(() => {
-    if (!emblaApi || hovering) return;
-
-    const interval = setInterval(() => {
-      emblaApi.scrollNext();
-    }, AUTOPLAY_MS);
-
-    return () => clearInterval(interval);
-  }, [emblaApi, hovering]);
 
   return (
     <section
