@@ -69,7 +69,6 @@ const SCHEDULE_SLIDES = [
 export default function ScheduleOfMasses() {
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true, duration: 60 }, [Fade()]);
   const [selectedIndex, setSelectedIndex] = useState(0);
-  const [hovering, setHovering] = useState(false);
 
   const scrollPrev = useCallback(() => emblaApi?.scrollPrev(), [emblaApi]);
   const scrollNext = useCallback(() => emblaApi?.scrollNext(), [emblaApi]);
@@ -95,11 +94,7 @@ export default function ScheduleOfMasses() {
   };
 
   return (
-    <section
-      className="relative min-h-screen w-full bg-base-content/95 dark:bg-neutral flex items-start justify-center"
-      onMouseEnter={() => setHovering(true)}
-      onMouseLeave={() => setHovering(false)}
-    >
+    <section className="relative min-h-screen w-full bg-base-content/95 dark:bg-neutral flex items-start justify-center">
       <div className="absolute inset-x-0 top-0 h-15 md:h-20 lg:h-20 overflow-hidden pointer-events-none">
         <Image
           src="/img/home/home-3.jpg"

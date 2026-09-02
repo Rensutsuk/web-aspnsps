@@ -143,12 +143,14 @@ export default function ContactUs() {
 
             <div className="flex justify-center lg:justify-end items-center h-full">
               <div className="relative w-full max-w-sm md:max-w-md h-full flex items-center justify-center">
-                <img
+                <Image
                   src="/img/home/omph-icon.png"
                   alt="Nuestra Señora del Perpetuo Socorro Icon"
                   className="h-auto max-h-[88%] w-auto object-contain"
-                  width="600"
-                  height="800"
+                  width={600}
+                  height={800}
+                  priority
+                  sizes="(max-width: 768px) 72vw, (max-width: 1024px) 38vw, 360px"
                 />
               </div>
             </div>
@@ -214,13 +216,13 @@ export default function ContactUs() {
             </ul>
 
             <div className="flex justify-center my-4 sm:my-6">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
+              <Image
                 src="/img/home/omph-icon.png"
                 alt="Nuestra Señora del Perpetuo Socorro Icon"
                 className="w-full max-w-[72%] h-auto"
-                width="600"
-                height="800"
+                width={600}
+                height={800}
+                sizes="72vw"
               />
             </div>
 
